@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Continer from "./Container";
+import Container from "./Container";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ export default function Nav() {
 
   return (
     <header className="relative z-20 bg-transparent font-sans text-foreground-secondary">
-      <Continer>
+      <Container>
         <nav>
           <div className="flex justify-between gap-12 items-center max-sm:py-3 sm:py-4 md:pt-[30px] md:pb-0">
             <div>
@@ -126,7 +126,7 @@ export default function Nav() {
             </div>
           </div>
         </nav>
-      </Continer>
+      </Container>
     </header>
   );
 }

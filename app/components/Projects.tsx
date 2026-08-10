@@ -1,4 +1,4 @@
-import Continer from "./layout/Container";
+import Container from "./layout/Container";
 import { ReactNode } from "react";
 import {
   ArrowUpRight,
@@ -178,7 +178,7 @@ const projects: Project[] = [
 export default function Projects() {
   return (
     <section className="relative overflow-hidden bg-background bg-noise py-12 md:py-16">
-      <Continer className="relative z-10">
+      <Container className="relative z-10">
         {/* Header */}
         <div className="flex flex-col justify-between gap-8 border-b border-border pb-10 md:gap-10 lg:flex-row lg:items-end">
           <div>
@@ -211,13 +211,13 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Projects grid */}
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Projects grid — 12-column grid system */}
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
           {projects.map((project) => (
             <a
               key={project.index}
               href="#"
-              className="group relative flex flex-col border border-border bg-transparent transition-colors hover:border-border-strong hover:bg-white/[0.02]"
+              className="lg:col-span-4 group relative flex flex-col border border-border bg-transparent transition-colors hover:border-border-strong hover:bg-white/[0.02]"
             >
               <div className="relative h-44 w-full border-b border-border bg-background-secondary/60 sm:h-52 lg:h-56">
                 <span className="absolute left-4 top-4 z-10 text-xs font-medium tracking-widest text-accent">
@@ -263,7 +263,7 @@ export default function Projects() {
             Start a Project
           </a>
         </div>
-      </Continer>
+      </Container>
     </section>
   );
 }

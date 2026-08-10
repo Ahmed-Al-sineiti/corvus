@@ -32,9 +32,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}
     >
-      <body className="min-h-screen flex flex-col bg-background text-foreground">
+      <body
+        suppressHydrationWarning
+        className="min-h-screen w-full overflow-x-hidden flex flex-col bg-background text-foreground"
+      >
         <Nav />
         {children}
         <Footer />
