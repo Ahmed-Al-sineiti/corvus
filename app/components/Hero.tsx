@@ -26,7 +26,7 @@ export default function Hero() {
                 We build digital systems <br className="hidden sm:inline" />
                 that drive <span className="text-blue-500">real impact</span>
               </h1>
-              <p className="font-sans mt-5 md:mt-6 w-full max-w-xl mx-auto lg:mx-0 text-sm md:text-base xl:text-lg text-foreground-secondary leading-relaxed">
+              <p className="font-sans mt-5 md:mt-6 w-full mx-auto lg:mx-0 text-sm md:text-base xl:text-lg text-foreground-secondary leading-relaxed">
                 From idea to scale, we design and build software, web and mobile
                 applications, and cloud solutions that help businesses grow.
               </p>

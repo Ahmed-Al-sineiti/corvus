@@ -143,7 +143,7 @@ export default function Services() {
               <br />
               engineered for <span className="text-accent">impact.</span>
             </h2>
-            <p className="font-sans mt-5 max-w-md text-sm leading-relaxed text-foreground-secondary sm:text-base">
+            <p className="font-sans mt-5 text-sm leading-relaxed text-foreground-secondary sm:text-base">
               We design, build, and scale digital systems that solve real
               problems and drive measurable results.
             </p>
