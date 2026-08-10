@@ -1,6 +1,6 @@
 "use client";
 
-import Continer from "./layout/Container";
+import Container from "./layout/Container";
 import { useState, FormEvent, ReactNode } from "react";
 import { Mail, Phone, MapPin, User, FileText, PenLine } from "lucide-react";
 
@@ -93,10 +93,10 @@ export default function Contact() {
 
   return (
     <section className="relative overflow-hidden bg-background bg-noise py-12 md:py-16">
-      <Continer className="relative z-10">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-10 xl:gap-14">
-          {/* Left column */}
-          <div>
+      <Container className="relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12">
+          {/* Left column — 5 columns */}
+          <div className="lg:col-span-5">
             <div className="mb-5 flex items-center gap-2 font-mono text-xs font-medium tracking-[0.2em] text-accent">
               <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
               CONTACT
@@ -163,10 +163,10 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right column — form */}
+          {/* Right column — form — 7 columns */}
           <form
             onSubmit={handleSubmit}
-            className="rounded-2xl border border-border bg-surface p-6 md:p-8"
+            className="lg:col-span-7 rounded-2xl border border-border bg-surface p-6 md:p-8"
           >
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
@@ -300,7 +300,7 @@ export default function Contact() {
             Visit FAQ
           </a>
         </div>
-      </Continer>
+      </Container>
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import Continer from "./layout/Container";
+import Container from "./layout/Container";
 import { ReactNode } from "react";
 import { Quote, Star, UserRound } from "lucide-react";
 
@@ -63,7 +63,7 @@ function Stars({ rating }: { rating: number }) {
 export default function Testimonials() {
   return (
     <section className="relative overflow-hidden bg-background bg-noise py-12 md:py-16">
-      <Continer className="relative z-10">
+      <Container className="relative z-10">
         {/* Header */}
         <div className="flex flex-col justify-between gap-10 border-b border-border pb-10 lg:flex-row lg:items-end">
           <div>
@@ -96,12 +96,12 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Testimonials grid */}
-        <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3">
+        {/* Testimonials grid — 12-column grid system */}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
           {testimonials.map((t) => (
             <div
               key={t.index}
-              className="group relative flex flex-col justify-between border border-border bg-transparent p-8 transition-colors hover:border-border-strong hover:bg-white/[0.02]"
+              className="lg:col-span-4 group relative flex flex-col justify-between border border-border bg-transparent p-8 transition-colors hover:border-border-strong hover:bg-white/[0.02]"
             >
               <div>
                 <div className="flex items-center justify-between">
@@ -161,7 +161,7 @@ export default function Testimonials() {
             Start a Project
           </a>
         </div>
-      </Continer>
+      </Container>
     </section>
   );
 }

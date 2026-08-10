@@ -1,4 +1,4 @@
-import Continer from "./layout/Container";
+import Container from "./layout/Container";
 import { UserRound } from "lucide-react";
 
 interface Member {
@@ -39,7 +39,7 @@ const team: Member[] = [
 export default function TeamWork() {
   return (
     <section className="relative overflow-hidden bg-background bg-noise py-12 md:py-16">
-      <Continer className="relative z-10">
+      <Container className="relative z-10">
         {/* Header */}
         <div className="flex flex-col justify-between gap-8 border-b border-border pb-10 md:gap-10 lg:flex-row lg:items-end">
           <div>
@@ -73,12 +73,12 @@ export default function TeamWork() {
           </div>
         </div>
 
-        {/* Team grid */}
-        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Team grid — 12-column grid system */}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
           {team.map((member) => (
             <div
               key={member.index}
-              className="group relative flex flex-col border border-border bg-transparent transition-colors hover:border-border-strong hover:bg-white/[0.02]"
+              className="lg:col-span-4 group relative flex flex-col border border-border bg-transparent transition-colors hover:border-border-strong hover:bg-white/[0.02]"
             >
               <div className="relative h-56 w-full overflow-hidden border-b border-border bg-background-secondary sm:h-64 lg:h-72">
                 <span className="absolute left-5 top-5 z-10 font-mono text-xs font-medium tracking-widest text-accent">
@@ -145,7 +145,7 @@ export default function TeamWork() {
             Start a Project
           </a>
         </div>
-      </Continer>
+      </Container>
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import Continer from "./Container";
+import Container from "./Container";
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
@@ -91,10 +91,10 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-background bg-noise pt-12 md:pt-16">
-      <Continer>
-        <div className="grid grid-cols-1 gap-8 border-t border-border pt-14 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.1fr] lg:gap-8 xl:gap-12">
-          {/* Brand */}
-          <div>
+      <Container>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 border-t border-border pt-14">
+          {/* Brand — 3 columns */}
+          <div className="lg:col-span-3">
             <Image
               src="/corvus.png"
               alt="Corvus"
@@ -114,9 +114,9 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Link columns */}
+          {/* Link columns — 2 columns each (total 6 columns) */}
           {columns.map((column) => (
-            <div key={column.title}>
+            <div key={column.title} className="lg:col-span-2">
               <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground">
                 {column.title}
               </p>
@@ -136,8 +136,8 @@ export default function Footer() {
             </div>
           ))}
 
-          {/* Get in touch */}
-          <div>
+          {/* Get in touch — 3 columns */}
+          <div className="lg:col-span-3">
             <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground">
               GET IN TOUCH
             </p>
@@ -190,7 +190,7 @@ export default function Footer() {
             .
           </p>
         </div>
-      </Continer>
+      </Container>
     </footer>
   );
 }

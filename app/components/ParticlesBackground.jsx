@@ -24,9 +24,7 @@ const sparkleSvg = `
 </svg>
 `;
 
-const sparkleDataUri = `data:image/svg+xml;base64,${
-  typeof window !== "undefined" ? btoa(sparkleSvg) : ""
-}`;
+const sparkleDataUri = `data:image/svg+xml;base64,${Buffer.from(sparkleSvg).toString("base64")}`;
 
 const MAX_PARTICLES = 100;
 
