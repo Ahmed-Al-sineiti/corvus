@@ -17,27 +17,71 @@ const projects: Project[] = [
     description:
       "An analytics platform built for real-time business intelligence. Delivers live KPI monitoring, predictive reporting, and deep data visualisation tailored to executive workflows.",
     tag: "Web Application",
+    media: (
+      <video
+        src="/takya.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={false}
+        className="h-full w-full object-cover"
+      />
+    ),
   },
   {
-    index: "02",
-    title: "Moveo Mobile App",
+    index: "01",
+    title: "Nexora Dashboard",
     description:
-      "A cross-platform fitness companion with GPS tracking, adaptive workout plans, and social progress sharing — all from a single, fluid mobile experience.",
-    tag: "Mobile App",
-  },
-  {
-    index: "03",
-    title: "CloudWave Platform",
-    description:
-      "Scalable cloud infrastructure management with automated provisioning, cost analytics, and real-time performance monitoring across AWS, Azure, and GCP.",
-    tag: "SaaS Platform",
-  },
-  {
-    index: "04",
-    title: "Vanto E-commerce",
-    description:
-      "A modern e-commerce storefront for premium fashion brands, featuring AI-powered product recommendations and a headless architecture built for speed.",
+      "An analytics platform built for real-time business intelligence. Delivers live KPI monitoring, predictive reporting, and deep data visualisation tailored to executive workflows.",
     tag: "Web Application",
+    media: (
+      <video
+        src="/takya.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={false}
+        className="h-full w-full object-cover"
+      />
+    ),
+  },
+  {
+    index: "01",
+    title: "Nexora Dashboard",
+    description:
+      "An analytics platform built for real-time business intelligence. Delivers live KPI monitoring, predictive reporting, and deep data visualisation tailored to executive workflows.",
+    tag: "Web Application",
+    media: (
+      <video
+        src="/takya.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={false}
+        className="h-full w-full object-cover"
+      />
+    ),
+  },
+  {
+    index: "01",
+    title: "Nexora Dashboard",
+    description:
+      "An analytics platform built for real-time business intelligence. Delivers live KPI monitoring, predictive reporting, and deep data visualisation tailored to executive workflows.",
+    tag: "Web Application",
+    media: (
+      <video
+        src="/takya.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={false}
+        className="h-full w-full object-cover"
+      />
+    ),
   },
 ];
 
@@ -171,10 +215,7 @@ export default function Projects() {
         <StaggerGroup className="flex flex-col gap-6">
           {projects.map((project, idx) => (
             <StaggerItem key={project.index}>
-              <ProjectRow
-                project={project}
-                reversed={idx % 2 !== 0}
-              />
+              <ProjectRow project={project} reversed={idx % 2 !== 0} />
             </StaggerItem>
           ))}
         </StaggerGroup>

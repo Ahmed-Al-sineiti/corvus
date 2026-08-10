@@ -59,7 +59,7 @@ export default function Hero() {
                     key={stat.label}
                     className={`text-foreground-secondary sm:border-r sm:border-border sm:pr-4 sm:text-left ${i === stats.length - 1 ? "sm:border-r-0" : ""}`}
                   >
-                    <p className="pb-1.5 font-mono text-3xl xl:text-4xl text-white font-semibold leading-[0.9]">
+                    <p className="pb-1.5  font-mono text-3xl xl:text-4xl text-white font-semibold leading-[0.9]">
                       {stat.value}
                     </p>
                     <p className="font-sans text-sm">{stat.label}</p>
