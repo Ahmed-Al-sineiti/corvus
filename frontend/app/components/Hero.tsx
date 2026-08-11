@@ -12,7 +12,7 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section className="relative flex items-start min-h-[400px] sm:min-h-[500px] pt-6 pb-8 md:pt-8 md:pb-8 lg:pb-8 overflow-hidden bg-background bg-noise">
+    <section id="hero" className="relative flex items-start min-h-[400px] sm:min-h-[500px] pt-6 pb-8 md:pt-8 md:pb-8 lg:pb-8 overflow-hidden bg-background bg-noise">
       <Container className="relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Text column — 7 columns */}

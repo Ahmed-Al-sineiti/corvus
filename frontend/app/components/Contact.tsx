@@ -146,7 +146,7 @@ export default function Contact() {
                       : ""
                   }`}
                 >
-                  <div className="relative flex h-11 w-11 shrink-0 items-center justify-center border border-border text-foreground-secondary transition-colors duration-300 hover:border-accent/50 hover:text-accent">
+                  <div className="relative flex h-11 w-11 shrink-0 items-center justify-center border border-border text-foreground-secondary rounded-[10px] transition-colors duration-300 hover:border-white/50 hover:text-white">
                     {point.icon}
                   </div>
                   <div>

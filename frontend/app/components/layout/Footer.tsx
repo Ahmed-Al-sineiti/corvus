@@ -12,33 +12,19 @@ const columns: FooterColumn[] = [
   {
     title: "SERVICES",
     links: [
-      { label: "Software Development", href: "#" },
       { label: "UI/UX Design", href: "#" },
-      { label: "Cloud Solutions", href: "#" },
-      { label: "SaaS Products", href: "#" },
-      { label: "Mobile Development", href: "#" },
-      { label: "AI Integration", href: "#" },
+      { label: "Web Development", href: "#" },
+      { label: "SEO Optimization", href: "#" },
+      { label: "Maintenance", href: "#" },
     ],
   },
   {
-    title: "WORK",
+    title: "LINKS",
     links: [
-      { label: "Web Applications", href: "#" },
-      { label: "Mobile Apps", href: "#" },
-      { label: "SaaS Platforms", href: "#" },
-      { label: "Enterprise Systems", href: "#" },
-      { label: "Case Studies", href: "#" },
-      { label: "All Projects", href: "#" },
-    ],
-  },
-  {
-    title: "COMPANY",
-    links: [
-      { label: "About Corvus", href: "#" },
-      { label: "Our Mission", href: "#" },
-      { label: "Our Team", href: "#" },
-      { label: "Careers", href: "#" },
-      { label: "Blog", href: "#" },
+      { label: "Main", href: "#nav" },
+      { label: "Services", href: "#services" },
+      { label: "Projects", href: "#projects" },
+      { label: "Contact", href: "#contact" },
     ],
   },
 ];
@@ -85,15 +71,6 @@ const socials = [
     ),
     href: "#",
     label: "GitHub",
-  },
-  {
-    icon: (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 24C5.385 24 0 18.615 0 12S5.385 0 12 0s12 5.385 12 12-5.385 12-12 12zm0-22C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm4.119 6.946c-.31.195-1.282.546-1.668.566-.386.019-2.312-.082-3.026-.177-.714-.096-2.593 1.922-2.813 2.344-.221.423-1.329 2.542-1.369 2.71-.04.169.453.651.569.781.116.131.637.531.761.565.124.034.555-.214.679-.289.124-.075 2.332-1.309 2.506-1.576.174-.267.236-.441.197-.599-.039-.158-.216-.363-.346-.48-.131-.117-.406-.349-.438-.424-.031-.075.002-.123.075-.148.073-.025.973-.405 1.737-.573.765-.168 1.315-.114 1.509-.048.194.066.269.206.256.373-.013.167-.179.795-.283 1.128-.104.333-.668 2.343-.743 2.632-.075.289.352.563.687.634.335.071 3.047.858 3.431.893.384.035.791-.179.882-.516.091-.337 1.023-4.748.981-5.121-.042-.373-.544-.687-1.086-.845z" />
-      </svg>
-    ),
-    href: "#",
-    label: "Dribbble",
   },
   {
     icon: (
@@ -156,7 +133,7 @@ export default function Footer() {
             <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground">
               GET IN TOUCH
             </p>
-            <div className="mt-4 mb-5 border-t border-border" />
+            <div className="mt-4 mb-5 border-t border-border " />
             <ul className="flex flex-col gap-3.5">
               {contactPoints.map((point) => (
                 <li
@@ -170,17 +147,18 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-
-            <p className="mt-8 font-mono text-xs font-medium tracking-[0.2em] text-foreground-secondary">
+          </div>
+          <div>
+            <p className=" font-mono text-xs font-medium tracking-[0.2em] text-foreground">
               FOLLOW US
             </p>
-            <div className="mt-4 flex items-center gap-2.5">
+            <div className="mt-4 mb-5 flex flex-row gap-6 border-t border-border">
               {socials.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="flex h-9 w-9 items-center justify-center border border-border text-foreground-secondary transition-colors hover:border-border-strong hover:bg-surface hover:text-foreground"
+                  className="mt-2 flex h-9 w-9 items-center justify-center  text-foreground-secondary transition-colors hover:border-border-strong  hover:text-foreground"
                 >
                   {social.icon}
                 </a>

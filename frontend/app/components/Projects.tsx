@@ -88,7 +88,7 @@ const projects: Project[] = [
 /* ─── Placeholder media cell ─────────────────────────────────── */
 function MediaPlaceholder({ index }: { index: string }) {
   return (
-    <div className="relative h-full w-full flex items-center justify-center overflow-hidden bg-[#111111]">
+    <div id="projects" className="relative h-full w-full flex items-center justify-center overflow-hidden bg-[#111111]">
       {/* Corner marks */}
       <span className="absolute top-4 left-4 font-mono text-[10px] tracking-[0.2em] text-[#404040]">
         {index}

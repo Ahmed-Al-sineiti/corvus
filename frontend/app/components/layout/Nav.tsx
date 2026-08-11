@@ -15,7 +15,7 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="relative z-20 bg-transparent font-sans text-foreground-secondary">
+    <header id="nav" className="relative z-20 bg-transparent font-sans text-foreground-secondary">
       <Container>
         <nav>
           <div className="flex items-center justify-between gap-6 py-4 md:py-5">

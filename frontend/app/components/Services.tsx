@@ -298,7 +298,7 @@ const SERVICES: ServiceItem[] = [
 
 const ServicesSection: FC = () => {
   return (
-    <section className="relative bg-background py-24 sm:py-28">
+    <section id="services" className="relative bg-background py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <StaggerGroup className="grid grid-cols-1 divide-y divide-white/[0.08] sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
           {SERVICES.map(({ fig, title, description, Icon }, i) => (
