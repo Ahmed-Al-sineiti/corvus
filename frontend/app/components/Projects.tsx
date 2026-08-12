@@ -208,7 +208,7 @@ export default function Projects() {
     <section
       id="projects"
       className="relative overflow-hidden bg-background py-8 md:py-10"
-      style={{ backgroundColor: "#080808" }}
+      style={{ backgroundColor: "#000000" }}
     >
       <Container className="relative z-10">
         {/* ── Project rows ── */}
