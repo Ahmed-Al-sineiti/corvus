@@ -40,9 +40,10 @@ export default function Nav() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="text-sm text-foreground-secondary transition-colors hover:text-foreground"
+                    className="relative group text-sm text-foreground-secondary transition-colors hover:text-foreground"
                   >
                     {link.label}
+                    <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-foreground origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
                   </Link>
                 ))}
               </div>
@@ -50,7 +51,7 @@ export default function Nav() {
               {/* CTA */}
               <Link
                 href="#contact"
-                className="rounded-full border border-[#3b3b3b] bg-[#1a1a1a] px-5 py-2 text-sm font-medium text-foreground transition-colors hover:bg-[#242424] hover:border-[#4a4a4a]"
+                className="rounded-full border border-[#3b3b3b] bg-[#1a1a1a] px-5 py-2 text-sm font-medium text-foreground transition-all duration-300 hover:bg-[#242424] hover:border-[#4a4a4a] hover:scale-105 active:scale-95"
               >
                 Start a Project
               </Link>
@@ -84,15 +85,16 @@ export default function Nav() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="text-sm text-foreground-secondary hover:text-foreground transition-colors"
+                  className="relative group w-fit text-sm text-foreground-secondary hover:text-foreground transition-colors"
                 >
                   {link.label}
+                  <span className="absolute -bottom-0.5 left-0 w-full h-[1px] bg-foreground origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
                 </Link>
               ))}
               <Link
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-2 inline-flex w-fit rounded-full border border-[#3b3b3b] bg-[#1a1a1a] px-5 py-2 text-sm font-medium text-foreground"
+                className="mt-2 inline-flex w-fit rounded-full border border-[#3b3b3b] bg-[#1a1a1a] px-5 py-2 text-sm font-medium text-foreground transition-all duration-300 hover:bg-[#242424] hover:scale-105 active:scale-95"
               >
                 Start a Project
               </Link>

@@ -6,8 +6,11 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <div className="h-px w-full bg-white/10" />
       <Services />
+      <div className="h-px w-full bg-white/10" />
       <Projects />
+      <div className="h-px w-full bg-white/10" />
       <Contact />
     </>
   );

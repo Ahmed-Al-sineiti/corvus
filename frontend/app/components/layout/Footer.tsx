@@ -118,9 +118,10 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="font-sans text-sm text-foreground-secondary transition-colors hover:text-foreground"
+                      className="relative group font-sans text-sm text-foreground-secondary transition-colors hover:text-foreground"
                     >
                       {link.label}
+                      <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-foreground origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
                     </Link>
                   </li>
                 ))}
@@ -158,7 +159,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="mt-2 flex h-9 w-9 items-center justify-center  text-foreground-secondary transition-colors hover:border-border-strong  hover:text-foreground"
+                  className="mt-2 flex h-9 w-9 items-center justify-center text-foreground-secondary transition-all duration-300 hover:scale-110 hover:text-foreground"
                 >
                   {social.icon}
                 </a>
