@@ -13,6 +13,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { StaggerGroup, StaggerItem } from "../../components/StaggerGroup";
+import { authFetch } from "../../../lib/auth";
 
 interface Message {
   id: number;
@@ -30,7 +31,7 @@ export default function MessagesPage() {
   const [error, setError] = useState<string | null>(null);
 
   const fetchMessagesApi = async (): Promise<Message[]> => {
-    const response = await fetch(API_URL, {
+    const response = await authFetch(API_URL, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
