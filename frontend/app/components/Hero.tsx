@@ -2,13 +2,8 @@ import Container from "./layout/Container";
 import Link from "next/link";
 import Image from "next/image";
 import FadeIn from "./FadeIn";
+import Magnetic from "./ui/Magnetic";
 
-const stats = [
-  { value: "50+", label: "Projects Delivered" },
-  { value: "30+", label: "Happy Clients" },
-  { value: "6+", label: "Industries Served" },
-  { value: "10+", label: "Countries Reached" },
-];
 
 export default function Hero() {
   return (
@@ -17,14 +12,15 @@ export default function Hero() {
       className="relative flex overflow-hidden bg-black lg:-mt-[104px] lg:h-[950px]"
     >
       {/* Background image — right side, per Figma */}
-      <div className="pointer-events-none absolute -right-[3vw] top-[51px] hidden w-[81.07vw] select-none opacity-100 lg:block">
+      <div className="pointer-events-none absolute -right-[3vw] top-[51px] hidden w-[81.07vw] select-none opacity-[0.78] lg:block">
         <Image
-          src="/hero-bg.png"
+          src="/hero.png"
           alt=""
           width={1551}
           height={867}
           priority
-          className="h-auto w-full"
+          unoptimized
+          className="h-auto w-full filter contrast-125 brightness-110"
         />
       </div>
 
@@ -33,8 +29,8 @@ export default function Hero() {
           {/* Announcement badge */}
           <FadeIn delay={0}>
             <Link
-              href="#"
-              className="group inline-flex items-center gap-2.5 rounded-full border border-[#2b2b2b] bg-white/[0.03] py-1.5 pl-1.5 pr-4 font-sans text-sm text-foreground-secondary"
+              href="#services"
+              className="group inline-flex items-center gap-2.5 rounded-full border border-[#2b2b2b] bg-white/[0.03] py-1.5 pl-1.5 pr-4 font-sans text-sm text-foreground-secondary hover:scale-105 transition-all duration-300 hover:bg-white/[0.08]"
             >
               <span className="inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs font-semibold leading-none text-background">
                 New
@@ -64,19 +60,17 @@ export default function Hero() {
             </FadeIn>
           </div>
 
-          {/* Stats */}
+          {/* CTA */}
           <FadeIn delay={0.3}>
-            <div className="grid grid-cols-2 gap-6 pt-10 lg:grid-cols-4 lg:pt-[149px]">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <p className="pb-1.5 font-mono text-[clamp(1.375rem,1.57vw,1.875rem)] font-semibold leading-[1.2] text-white">
-                    {stat.value}
-                  </p>
-                  <p className="font-sans text-sm text-foreground-secondary">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
+            <div className="pt-10 lg:pt-[100px]">
+              <Magnetic intensity={0.15}>
+                <Link
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[15px] font-medium text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+                >
+                  Let&apos;s build something together
+                </Link>
+              </Magnetic>
             </div>
           </FadeIn>
         </div>

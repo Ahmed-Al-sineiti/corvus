@@ -1,5 +1,6 @@
 import Container from "./layout/Container";
 import { StaggerGroup, StaggerItem } from "./StaggerGroup";
+import TextReveal from "./ui/TextReveal";
 
 interface Project {
   index: string;
@@ -8,6 +9,7 @@ interface Project {
   tag: string;
   /** Swap this for a real <video> or <Image> when ready */
   media?: React.ReactNode;
+  themeColor?: string;
 }
 
 const projects: Project[] = [
@@ -17,6 +19,7 @@ const projects: Project[] = [
     description:
       "An analytics platform built for real-time business intelligence. Delivers live KPI monitoring, predictive reporting, and deep data visualisation tailored to executive workflows.",
     tag: "Web Application",
+    themeColor: "#3b82f6", // Blue
     media: (
       <video
         src="/takya.mp4"
@@ -30,11 +33,12 @@ const projects: Project[] = [
     ),
   },
   {
-    index: "01",
+    index: "02",
     title: "Nexora Dashboard",
     description:
       "An analytics platform built for real-time business intelligence. Delivers live KPI monitoring, predictive reporting, and deep data visualisation tailored to executive workflows.",
     tag: "Web Application",
+    themeColor: "#10b981", // Emerald
     media: (
       <video
         src="/takya.mp4"
@@ -48,11 +52,12 @@ const projects: Project[] = [
     ),
   },
   {
-    index: "01",
+    index: "03",
     title: "Nexora Dashboard",
     description:
       "An analytics platform built for real-time business intelligence. Delivers live KPI monitoring, predictive reporting, and deep data visualisation tailored to executive workflows.",
     tag: "Web Application",
+    themeColor: "#8b5cf6", // Violet
     media: (
       <video
         src="/takya.mp4"
@@ -66,11 +71,12 @@ const projects: Project[] = [
     ),
   },
   {
-    index: "01",
+    index: "04",
     title: "Nexora Dashboard",
     description:
       "An analytics platform built for real-time business intelligence. Delivers live KPI monitoring, predictive reporting, and deep data visualisation tailored to executive workflows.",
     tag: "Web Application",
+    themeColor: "#f59e0b", // Amber
     media: (
       <video
         src="/takya.mp4"
@@ -148,7 +154,7 @@ function ProjectRow({
   reversed: boolean;
 }) {
   const textBlock = (
-    <div className="flex flex-col h-full">
+    <div className="relative z-10 flex flex-col h-full">
       {/* Title cell */}
       <div className="flex-1 border-b border-[#2b2b2b] p-8 md:p-10 flex flex-col justify-between">
         {/* Tag */}
@@ -171,7 +177,7 @@ function ProjectRow({
   );
 
   const mediaBlock = (
-    <div className="h-full min-h-[320px] md:min-h-0">
+    <div className="relative z-10 h-full min-h-[320px] md:min-h-0">
       {project.media ?? <MediaPlaceholder index={project.index} />}
     </div>
   );
@@ -185,14 +191,24 @@ function ProjectRow({
    */
   return (
     <div
-      className={`flex flex-col md:flex-row border border-[#2b2b2b] rounded-3xl overflow-hidden transition-colors hover:bg-white/[0.015] ${
+      className={`group relative flex flex-col md:flex-row border border-[#2b2b2b] rounded-3xl overflow-hidden transition-all duration-500 hover:border-white/10 ${
         reversed ? "md:flex-row-reverse" : ""
       }`}
       style={{ minHeight: "380px" }}
     >
+      {/* Dynamic Theme Glow */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100"
+        style={{
+          background: project.themeColor
+            ? `radial-gradient(circle at 50% 50%, ${project.themeColor}15 0%, transparent 70%)`
+            : "transparent",
+        }}
+      />
+
       {/* Left-ish column (adjusts border based on direction) */}
       <div
-        className={`md:w-1/2 border-b border-[#2b2b2b] md:border-b-0 ${reversed ? "md:border-l" : "md:border-r"} md:border-[#2b2b2b]`}
+        className={`relative z-10 md:w-1/2 border-b border-[#2b2b2b] md:border-b-0 ${reversed ? "md:border-l" : "md:border-r"} md:border-[#2b2b2b] transition-colors duration-500 group-hover:bg-white/[0.02]`}
       >
         {textBlock}
       </div>
@@ -207,12 +223,23 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative overflow-hidden bg-background py-8 md:py-10"
+      className="relative overflow-hidden bg-background py-32"
       style={{ backgroundColor: "#000000" }}
     >
       <Container className="relative z-10">
+        <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
+          <div className="max-w-2xl">
+            <TextReveal as="h2" className="font-heading text-4xl font-medium leading-[1.29] tracking-[-0.0375em] sm:text-5xl">
+              Selected{"\n"}Works
+            </TextReveal>
+            <TextReveal as="p" delay={300} className="font-sans mt-5 text-sm leading-relaxed text-foreground-secondary sm:text-base xl:text-lg">
+              A showcase of our recent digital experiences. We partner with forward-thinking brands to build products that matter.
+            </TextReveal>
+          </div>
+        </div>
+
         {/* ── Project rows ── */}
-        <StaggerGroup className="flex flex-col gap-6">
+        <StaggerGroup className="flex flex-col gap-16">
           {projects.map((project, idx) => (
             <StaggerItem key={project.index}>
               <ProjectRow project={project} reversed={idx % 2 !== 0} />
