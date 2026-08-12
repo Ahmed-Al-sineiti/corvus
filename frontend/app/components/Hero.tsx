@@ -4,6 +4,7 @@ import Image from "next/image";
 import FadeIn from "./FadeIn";
 import Magnetic from "./ui/Magnetic";
 
+
 export default function Hero() {
   return (
     <section
