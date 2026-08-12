@@ -66,7 +66,7 @@ export default function Hero() {
               <Magnetic intensity={0.15}>
                 <Link
                   href="#contact"
-                  className="inline-flex items-center justify-center rounded-full bg-red-600 px-8 py-4 text-[15px] font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-red-700 active:scale-95 shadow-[0_0_20px_rgba(220,38,38,0.3)] hover:shadow-[0_0_30px_rgba(220,38,38,0.5)]"
+                  className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-[15px] font-medium text-black transition-all duration-300 hover:scale-105 hover:bg-white/90 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
                 >
                   Let&apos;s build something together
                 </Link>
