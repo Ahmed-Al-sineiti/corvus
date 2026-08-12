@@ -137,7 +137,7 @@ export default function Contact() {
       <Container className="relative z-10 w-full max-w-[1752px]">
         <div className="flex flex-col lg:flex-row items-center justify-between w-full h-auto lg:h-[578px] gap-12 lg:gap-[51px]">
           {/* Left column */}
-          <ScrollReveal direction="up" delay={0.1} className="flex flex-col justify-center w-full lg:w-[703px] shrink-0">
+          <ScrollReveal direction="up" delay={0.1} className="flex flex-col justify-center w-full lg:w-[40%]">
             <TextReveal as="h2" className="font-heading text-4xl font-medium leading-[1.29] tracking-[-0.0375em] sm:text-5xl">
               Let&apos;s build
               <br />
@@ -175,11 +175,11 @@ export default function Contact() {
           </ScrollReveal>
 
           {/* Right column — form */}
-          <ScrollReveal direction="up" delay={0.3} className="relative w-full lg:w-[998px] h-full shrink-0">
+          <ScrollReveal direction="up" delay={0.3} className="relative w-full lg:w-[55%] h-full">
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="relative z-10 flex flex-col w-full h-full rounded-3xl border border-[#2b2b2b] bg-[#0a0a0a] p-6 md:p-10 lg:p-[94px] shadow-2xl transition-colors duration-300 gap-8"
+              className="relative z-10 flex flex-col w-full h-full rounded-3xl border border-[#2b2b2b] bg-[#0a0a0a] p-6 md:p-10 lg:p-12 xl:p-[94px] shadow-2xl transition-colors duration-300 gap-8"
             >
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div className="flex flex-col gap-2">
