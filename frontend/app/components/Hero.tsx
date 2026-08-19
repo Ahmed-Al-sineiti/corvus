@@ -29,15 +29,15 @@ export default function Hero() {
           {/* Heading + paragraph */}
           <div className="mt-[-50px]">
             <FadeIn delay={0.1}>
-              <h1 className="font-heading mb-5 whitespace-nowrap text-[clamp(7.5rem,3.77vw,4.5rem)] font-normal leading-[1.1] tracking-tight text-white">
+              <h1 className="font-heading mb-5 whitespace-nowrap text-[clamp(2rem,8vw,4.5rem)] font-normal leading-[1.1] tracking-tight text-white">
                 Building Today’s
               </h1>
-              <h1 className="whitespace-nowrap font-heading text-[clamp(5.5rem,3.77vw,4.5rem)] font-normal leading-[1.1] tracking-tight text-white">
+              <h1 className="whitespace-nowrap font-heading text-[clamp(2rem,8vw,4.5rem)] font-normal leading-[1.1] tracking-tight text-white">
                 <AnimatedHeader />
               </h1>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="mt-10 font-sans text-[clamp(1rem,0.94vw,1.125rem)] leading-[1.625] text-foreground-secondary lg:mt-10">
+              <p className="mt-6 font-sans text-[clamp(1rem,0.94vw,1.125rem)] leading-[1.625] text-foreground-secondary sm:mt-8 lg:mt-10">
                 Utility crafts award-winning custom digital products driven by
                 strategy, design and technology
               </p>
@@ -46,7 +46,7 @@ export default function Hero() {
 
           {/* CTA */}
           <FadeIn delay={0.3}>
-            <div className="pt-10 mt-9">
+            <div className="pt-8 mt-8 sm:pt-10 sm:mt-9">
               <Magnetic intensity={0.15}>
                 <Link
                   href="#contact"

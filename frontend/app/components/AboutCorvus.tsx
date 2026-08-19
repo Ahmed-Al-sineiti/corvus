@@ -51,14 +51,14 @@ export default function AboutCorvus() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#050505] px-6 py-28 text-[#F5F5F3] md:px-16 lg:px-24"
+      className="relative overflow-hidden bg-[#050505] px-6 py-20 text-[#F5F5F3] md:px-16 md:py-28 lg:px-24"
     >
       {/* faint node-link constellation, echoes the hero */}
       <ConstellationBackdrop />
 
       <div className="relative mx-auto max-w-7xl">
         <h2
-          className="max-w-4xl text-4xl font-semibold leading-[1.1] tracking-tight md:text-6xl"
+          className="max-w-4xl text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl md:text-6xl"
           style={{
             fontFamily: "var(--font-display, 'Space Grotesk', sans-serif)",
           }}
@@ -69,7 +69,7 @@ export default function AboutCorvus() {
         </h2>
 
         {/* main grid: video left, copy + logo right */}
-        <div className="mt-16 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-2 md:gap-16">
+        <div className="mt-12 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-2 md:gap-16">
           {/* left — video */}
           <div
             className={`group relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A0A0C] transition-all duration-1000 ${

@@ -9,7 +9,7 @@ export default function Projects() {
   const marqueeVideos = [...VIDEOS, ...VIDEOS];
 
   return (
-    <section id="projects" className="relative overflow-hidden bg-black py-32">
+    <section id="projects" className="relative overflow-hidden bg-black py-20 md:py-28 lg:py-32">
       <Container className="relative z-10">
         <div className="mb-16 md:mb-20 flex flex-col items-center text-center">
           <div className="max-w-2xl">
@@ -57,7 +57,7 @@ export default function Projects() {
           }
         `}</style>
 
-        <div className="animate-marquee-right gap-8">
+        <div className="animate-marquee-right gap-4 sm:gap-8">
           {marqueeVideos.map((src, idx) => (
             <video
               key={`row1-${idx}`}
@@ -66,12 +66,12 @@ export default function Projects() {
               loop
               muted
               playsInline
-              className="h-[360px] w-[580px] sm:h-[460px] sm:w-[740px] shrink-0 object-cover"
+              className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
             />
           ))}
         </div>
 
-        <div className="animate-marquee-left gap-8">
+        <div className="animate-marquee-left gap-4 sm:gap-8">
           {marqueeVideos.map((src, idx) => (
             <video
               key={`row2-${idx}`}
@@ -80,7 +80,7 @@ export default function Projects() {
               loop
               muted
               playsInline
-              className="h-[360px] w-[580px] sm:h-[460px] sm:w-[740px] shrink-0 object-cover"
+              className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
             />
           ))}
         </div>

@@ -149,7 +149,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-          <div>
+          <div className="lg:col-span-2">
             <p className=" font-mono text-xs font-medium tracking-[0.2em] text-foreground">
               FOLLOW US
             </p>

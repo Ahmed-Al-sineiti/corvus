@@ -44,9 +44,9 @@ const SERVICES: ServiceItem[] = [
 
 const ServicesSection: FC = () => {
   return (
-    <section id="services" className="relative bg-background py-32">
+    <section id="services" className="relative bg-background py-20 md:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-[1912px] px-6 sm:px-8 lg:px-[42px]">
-        <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
+        <div className="mb-12 sm:mb-16 md:mb-24 flex flex-col items-center text-center">
           <div className="max-w-2xl">
             <TextReveal as="h2" className="font-heading text-4xl font-medium leading-[1.29] tracking-[-0.0375em] sm:text-5xl">
               Our{"\n"}Services
@@ -56,11 +56,11 @@ const ServicesSection: FC = () => {
             </TextReveal>
           </div>
         </div>
-        <StaggerGroup className="grid grid-cols-1 gap-16 divide-y divide-white/[0.08] sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+        <StaggerGroup className="grid grid-cols-1 gap-10 divide-y divide-white/[0.08] sm:grid-cols-2 sm:gap-12 sm:divide-x sm:divide-y-0 lg:grid-cols-4 lg:gap-16">
           {SERVICES.map(({ fig, title, description, icon, imgClassName }, i) => (
             <StaggerItem key={i} className="h-full">
               <div className="group relative flex h-full flex-col px-2 py-10 sm:px-8 sm:py-0 lg:px-8">
-                <div className="relative mb-8 flex flex-1 w-full items-center justify-center min-h-[250px]">
+                <div className="relative mb-8 flex flex-1 w-full items-center justify-center min-h-[200px] sm:min-h-[250px]">
                   <span className="absolute left-0 top-0 font-mono text-xs uppercase text-[#8A8F98]">
                     {fig}
                   </span>

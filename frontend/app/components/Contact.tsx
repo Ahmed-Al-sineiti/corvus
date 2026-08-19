@@ -121,7 +121,7 @@ export default function Contact() {
       `}</style>
       <Container className="relative z-10 w-full max-w-[1400px] px-6 sm:px-10">
         {/* Header */}
-        <div className="mb-20 sm:mb-28">
+        <div className="mb-14 sm:mb-20 lg:mb-28">
           <TextReveal
             as="h1"
             className="font-sans text-5xl font-normal tracking-tight text-white sm:text-7xl lg:text-8xl"
@@ -138,14 +138,14 @@ export default function Contact() {
         </div>
 
         {/* Content Layout */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-20">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 lg:gap-20">
           {/* Left Title */}
           <ScrollReveal
             direction="up"
             delay={0.1}
             className="w-full lg:w-[30%]"
           >
-            <h2 className="font-sans text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            <h2 className="font-sans text-2xl font-semibold tracking-tight text-white sm:text-3xl lg:text-4xl">
               Contact us
             </h2>
           </ScrollReveal>
