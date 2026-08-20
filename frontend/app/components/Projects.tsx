@@ -9,7 +9,10 @@ export default function Projects() {
   const marqueeVideos = [...VIDEOS, ...VIDEOS];
 
   return (
-    <section id="projects" className="relative overflow-hidden bg-black py-20 md:py-28 lg:py-32">
+    <section
+      id="projects"
+      className="relative overflow-hidden bg-black py-20 md:py-28 lg:py-32"
+    >
       <Container className="relative z-10">
         <div className="mb-16 md:mb-20 flex flex-col items-center text-center">
           <div className="max-w-2xl">
@@ -44,16 +47,16 @@ export default function Projects() {
           .animate-marquee-right {
             display: flex;
             width: max-content;
-            animation: marquee-right 35s linear infinite;
+            animation: marquee-right 20s linear infinite;
           }
           .animate-marquee-left {
             display: flex;
             width: max-content;
-            animation: marquee-left 35s linear infinite;
+            animation: marquee-left 20s linear infinite;
           }
           .animate-marquee-right:hover,
           .animate-marquee-left:hover {
-            animation-play-state: paused;
+            animation-play-state: pause ;
           }
         `}</style>
 

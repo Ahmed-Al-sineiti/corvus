@@ -50,7 +50,7 @@ export default function Hero() {
               <Magnetic intensity={0.15}>
                 <Link
                   href="#contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#2A2A2A] px-8 py-4 text-[15px] font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-[#333333] active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[15px] font-medium text-black transition-all duration-300 hover:scale-105 hover: active:scale-95"
                 >
                   Work with us
                   <svg
