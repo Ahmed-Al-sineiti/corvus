@@ -66,7 +66,7 @@ export default function AboutSection() {
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                   </span>
                   <span className="text-[10px] font-mono font-semibold text-white tracking-widest uppercase mt-0.5">
-                    CORVUS CORE TEAM
+                    CORVUS DEVELOPMENT AGENCY
                   </span>
                 </div>
               </div>
