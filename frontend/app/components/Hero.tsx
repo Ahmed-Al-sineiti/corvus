@@ -1,18 +1,63 @@
 "use client";
+
+import { useState, useEffect, useRef } from "react";
 import Container from "./layout/Container";
 import Link from "next/link";
 import Image from "next/image";
 import FadeIn from "./FadeIn";
 import Magnetic from "./ui/Magnetic";
 import { AnimatedHeader } from "./AnimatedHeader";
+
 export default function Hero() {
+  const imgContainerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!imgContainerRef.current) return;
+      const rect = imgContainerRef.current.getBoundingClientRect();
+      setMousePos({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <section
       id="hero"
       className="relative flex overflow-hidden bg-black lg:-mt-[104px] lg:h-[950px]"
     >
-      {/* Background image — right side, per Figma */}
-      <div className="pointer-events-none absolute -right-[3vw] top-[51px] hidden w-[81.07vw] select-none opacity-[0.78] lg:block">
+      {/* أنيميشن نبض خافت للنقاط والشبكة فقط (على البيكسلات نفسها) */}
+      <style jsx>{`
+        @keyframes meshPulse {
+          0%,
+          100% {
+            filter: contrast(125%) brightness(100%)
+              drop-shadow(0 0 1px rgba(255, 255, 255, 0.2));
+          }
+          50% {
+            filter: contrast(140%) brightness(130%)
+              drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+          }
+        }
+        .animate-mesh-pulse {
+          animation: meshPulse 4s ease-in-out infinite;
+        }
+      `}</style>
+
+      {/* حاوية الرسمة (الغراب) */}
+      <div
+        ref={imgContainerRef}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="pointer-events-auto absolute -right-[3vw] top-[51px] hidden w-[81.07vw] select-none lg:block z-0"
+      >
+        {/* 1. الطبقة الأساسية: الشبكة العادية بتعمل نبض هادئ على النقاط فقط */}
         <Image
           src="/hero.png"
           alt=""
@@ -20,12 +65,32 @@ export default function Hero() {
           height={867}
           priority
           unoptimized
-          className="h-auto w-full filter contrast-125 brightness-110"
+          className="h-auto w-full opacity-80 animate-mesh-pulse"
         />
+
+        {/* 2. طبقة التوهج التفاعلي: تضيء النقاط والخطوط القريبة من الماوس بشدة بدون إضاءة الخلفية السوداء */}
+        <div
+          className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
+          style={{
+            opacity: isHovered ? 1 : 0,
+            WebkitMaskImage: `radial-gradient(250px circle at ${mousePos.x}px ${mousePos.y}px, black 0%, transparent 100%)`,
+            maskImage: `radial-gradient(250px circle at ${mousePos.x}px ${mousePos.y}px, black 0%, transparent 100%)`,
+          }}
+        >
+          <Image
+            src="/hero.png"
+            alt=""
+            width={1551}
+            height={867}
+            priority
+            unoptimized
+            className="h-auto w-full filter brightness-150 contrast-150 drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+          />
+        </div>
       </div>
 
-      <Container className="relative z-10 flex w-full flex-col justify-center py-16 sm:py-24 lg:py-0">
-        <div className="w-full max-w-[764px]">
+      <Container className="relative z-20 flex w-full flex-col justify-center py-16 sm:py-24 lg:py-0 pointer-events-none">
+        <div className="w-full max-w-[764px] pointer-events-auto">
           {/* Heading + paragraph */}
           <div className="mt-[-50px]">
             <FadeIn delay={0.1}>
@@ -50,7 +115,7 @@ export default function Hero() {
               <Magnetic intensity={0.15}>
                 <Link
                   href="#contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[15px] font-medium text-black transition-all duration-300 hover:scale-105 hover: active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[15px] font-medium text-black transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                   Work with us
                   <svg
@@ -68,7 +133,7 @@ export default function Hero() {
                     <polyline points="7 7 17 7 17 17"></polyline>
                   </svg>
                 </Link>
-              </Magnetic>{" "}
+              </Magnetic>
             </div>
           </FadeIn>
         </div>
