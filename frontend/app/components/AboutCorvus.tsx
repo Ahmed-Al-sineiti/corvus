@@ -8,7 +8,7 @@ export default function AboutSection() {
   const [activePara, setActivePara] = useState<number | null>(null);
 
   return (
-    <section className="w-full bg-black py-24 px-6 md:px-12 lg:px-24 font-sans border-t border-zinc-900/50">
+    <section id="about" className="w-full bg-black py-24 px-6 md:px-12 lg:px-24 font-sans border-t border-zinc-900/50">
       <div className="max-w-7xl mx-auto">
         {/* الجزء العلوي: العنوان والوصف في المنتصف */}
         <div className="text-center max-w-3xl mx-auto mb-24 flex flex-col items-center">
