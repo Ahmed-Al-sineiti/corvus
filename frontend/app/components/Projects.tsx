@@ -1,12 +1,30 @@
 "use client";
 
+import { useRef, useState } from "react";
 import Container from "./layout/Container";
 import TextReveal from "./ui/TextReveal";
 
-const VIDEOS = ["/takya.mp4", "/takya.mp4", "/takya.mp4", "/takya.mp4"];
+const VIDEOS = ["/takya.mp4", "/kingsfield.mp4", "/takya.mp4", "/kingsfield.mp4"];
 
 export default function Projects() {
-  const marqueeVideos = [...VIDEOS, ...VIDEOS];
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
+
+  const [row1Slow, setRow1Slow] = useState(false);
+  const [row2Slow, setRow2Slow] = useState(false);
+
+  const setRowSpeed = (
+    containerRef: React.RefObject<HTMLDivElement | null>,
+    speed: number
+  ) => {
+    if (!containerRef.current) return;
+    if (typeof containerRef.current.getAnimations === "function") {
+      const animations = containerRef.current.getAnimations({ subtree: true });
+      animations.forEach((anim) => {
+        anim.playbackRate = speed;
+      });
+    }
+  };
 
   return (
     <section
@@ -34,58 +52,143 @@ export default function Projects() {
         </div>
       </Container>
 
-      <div className="relative w-full overflow-hidden flex flex-col gap-8">
+      <div className="relative w-full overflow-hidden flex flex-col gap-4 sm:gap-8">
         <style>{`
           @keyframes marquee-right {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0%); }
+            from {
+              transform: translateX(calc(-100% - var(--marquee-gap)));
+            }
+            to {
+              transform: translateX(0);
+            }
           }
           @keyframes marquee-left {
-            0% { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
+            from {
+              transform: translateX(0);
+            }
+            to {
+              transform: translateX(calc(-100% - var(--marquee-gap)));
+            }
+          }
+          .marquee-wrapper {
+            --marquee-gap: 1rem;
+            display: flex;
+            width: max-content;
+            user-select: none;
+            gap: var(--marquee-gap);
+            cursor: pointer;
+          }
+          @media (min-width: 640px) {
+            .marquee-wrapper {
+              --marquee-gap: 2rem;
+            }
           }
           .animate-marquee-right {
             display: flex;
-            width: max-content;
+            flex-shrink: 0;
+            gap: var(--marquee-gap);
             animation: marquee-right 20s linear infinite;
+            will-change: transform;
           }
           .animate-marquee-left {
             display: flex;
-            width: max-content;
+            flex-shrink: 0;
+            gap: var(--marquee-gap);
             animation: marquee-left 20s linear infinite;
-          }
-          .animate-marquee-right:hover,
-          .animate-marquee-left:hover {
-            animation-play-state: pause ;
+            will-change: transform;
           }
         `}</style>
 
-        <div className="animate-marquee-right gap-4 sm:gap-8">
-          {marqueeVideos.map((src, idx) => (
-            <video
-              key={`row1-${idx}`}
-              src={src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
-            />
-          ))}
+        {/* Top Row: Moves to the right infinitely */}
+        <div
+          ref={row1Ref}
+          className="marquee-wrapper"
+          onClick={() => {
+            const nextState = !row1Slow;
+            setRow1Slow(nextState);
+            setRowSpeed(row1Ref, nextState ? 0.35 : 1);
+          }}
+          onMouseEnter={() => setRowSpeed(row1Ref, 0.35)}
+          onMouseLeave={() => {
+            if (!row1Slow) setRowSpeed(row1Ref, 1);
+          }}
+          onTouchStart={() => setRowSpeed(row1Ref, 0.35)}
+          onTouchEnd={() => {
+            if (!row1Slow) setRowSpeed(row1Ref, 1);
+          }}
+        >
+          <div className="animate-marquee-right">
+            {VIDEOS.map((src, idx) => (
+              <video
+                key={`row1-a-${idx}`}
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
+              />
+            ))}
+          </div>
+          <div className="animate-marquee-right" aria-hidden="true">
+            {VIDEOS.map((src, idx) => (
+              <video
+                key={`row1-b-${idx}`}
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="animate-marquee-left gap-4 sm:gap-8">
-          {marqueeVideos.map((src, idx) => (
-            <video
-              key={`row2-${idx}`}
-              src={src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
-            />
-          ))}
+        {/* Bottom Row: Moves to the left infinitely */}
+        <div
+          ref={row2Ref}
+          className="marquee-wrapper"
+          onClick={() => {
+            const nextState = !row2Slow;
+            setRow2Slow(nextState);
+            setRowSpeed(row2Ref, nextState ? 0.35 : 1);
+          }}
+          onMouseEnter={() => setRowSpeed(row2Ref, 0.35)}
+          onMouseLeave={() => {
+            if (!row2Slow) setRowSpeed(row2Ref, 1);
+          }}
+          onTouchStart={() => setRowSpeed(row2Ref, 0.35)}
+          onTouchEnd={() => {
+            if (!row2Slow) setRowSpeed(row2Ref, 1);
+          }}
+        >
+          <div className="animate-marquee-left">
+            {VIDEOS.map((src, idx) => (
+              <video
+                key={`row2-a-${idx}`}
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
+              />
+            ))}
+          </div>
+          <div className="animate-marquee-left" aria-hidden="true">
+            {VIDEOS.map((src, idx) => (
+              <video
+                key={`row2-b-${idx}`}
+                src={src}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
