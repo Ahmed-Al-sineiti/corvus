@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import {PhoneCallIcon} from "lucide-react";
 
 export default function ContactSection() {
   // حالة لحفظ الخدمات المحددة
@@ -39,37 +40,24 @@ export default function ContactSection() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                   </span>
-                  <svg
-                    className="w-5 h-5 text-zinc-300"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
-                    />
-                  </svg>
+                 <PhoneCallIcon className="h-4 w-4" strokeWidth={1.5} />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
-                    Prefer a 15-min discovery call?
+                    Book a Whatsapp call ?
                   </h4>
                   <p className="text-xs text-zinc-500 mt-0.5">
-                    Skip the form &amp; pick a time
+                    Send a message and we will reply quickly.
                   </p>
                 </div>
               </div>
               <Link
-                href="https://calendly.com"
+                href="https://wa.me/+201006560891"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-medium text-black bg-white hover:bg-zinc-200 px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 shrink-0 ml-3"
               >
-                Book Now
+                Chat now
               </Link>
             </div>
 

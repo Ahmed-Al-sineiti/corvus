@@ -84,7 +84,7 @@ export default function Hero() {
             height={867}
             priority
             unoptimized
-            className="h-auto w-full filter brightness-150 contrast-150 drop-shadow-[0_0_10px_rgba(255,255,255,1)]"
+            className="h-auto w-full filter brightness-120 contrast-150 "
           />
         </div>
       </div>
@@ -118,20 +118,6 @@ export default function Hero() {
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[15px] font-medium text-black transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                   Work with us
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
                 </Link>
               </Magnetic>
             </div>

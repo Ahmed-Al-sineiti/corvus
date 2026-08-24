@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import TextReveal from "./ui/TextReveal";
 
 export default function AboutSection() {
   const [activePara, setActivePara] = useState<number | null>(null);
@@ -11,14 +12,20 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto">
         {/* الجزء العلوي: العنوان والوصف في المنتصف */}
         <div className="text-center max-w-3xl mx-auto mb-24 flex flex-col items-center">
-          <span className="text-xs font-mono tracking-widest text-zinc-500 uppercase mb-4">
-            Who we are
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight">
-            A digital product studio based in Cairo,{" "}
-            <span className="text-zinc-500">built on</span> top-tier engineering
-            and design talent.
-          </h2>
+           <div className="max-w-2xl">
+                      <TextReveal
+                        as="h2"
+                        className="font-heading text-4xl font-medium leading-[1.29] tracking-[-0.0375em] text-white sm:text-5xl"
+                      >
+                        Who we are
+                      </TextReveal>
+                      <TextReveal
+                        as="p"
+                        delay={300}
+                        className="font-sans mt-5 text-sm leading-relaxed text-foreground-secondary sm:text-base xl:text-lg"
+                      >
+A digital product studio based in Cairo, built on top-tier engineering and design talent.                      </TextReveal>
+                    </div>
         </div>
 
         {/* الجزء السفلي: الصور العشوائية والمتوازية مع النص */}
