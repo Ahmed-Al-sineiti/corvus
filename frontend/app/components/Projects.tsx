@@ -126,7 +126,7 @@ export default function Projects() {
                 loop
                 muted
                 playsInline
-                className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
+                className="h-[200px] rounded-[16px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
               />
             ))}
           </div>
@@ -139,7 +139,7 @@ export default function Projects() {
                 loop
                 muted
                 playsInline
-                className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
+                className="h-[200px] rounded-[16px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
               />
             ))}
           </div>
@@ -172,7 +172,7 @@ export default function Projects() {
                 loop
                 muted
                 playsInline
-                className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
+                className="h-[200px] w-[320px] rounded-[16px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
               />
             ))}
           </div>
@@ -185,7 +185,7 @@ export default function Projects() {
                 loop
                 muted
                 playsInline
-                className="h-[200px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
+                className="h-[200px] w-[320px] rounded-[16px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
               />
             ))}
           </div>
