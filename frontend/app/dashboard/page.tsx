@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Container from "../components/layout/Container";
-import { StaggerGroup, StaggerItem } from "../components/StaggerGroup";
+import { StaggerGroup, StaggerItem } from "../components/ui/StaggerGroup";
 import {
   Inbox,
   Users,

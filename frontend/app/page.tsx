@@ -1,8 +1,9 @@
-import Hero from "./components/Hero";
-import Services from "./components/Services";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-import AboutCorvus from "./components/AboutCorvus";
+import Hero from "./components/sections/Hero";
+
+import Services from "./components/sections/Services";
+import Projects from "./components/sections/Projects";
+import Contact from "./components/sections/Contact";
+import AboutCorvus from "./components/sections/AboutCorvus";
 export default function Home() {
   return (
     <>

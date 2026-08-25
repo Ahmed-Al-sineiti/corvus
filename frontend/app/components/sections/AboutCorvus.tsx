@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import TextReveal from "./ui/TextReveal";
+import TextReveal from "../ui/TextReveal";
 
 export default function AboutSection() {
   const [activePara, setActivePara] = useState<number | null>(null);
