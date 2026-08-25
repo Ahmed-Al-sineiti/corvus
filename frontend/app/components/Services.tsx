@@ -98,47 +98,35 @@ const ServiceCard: FC<{ service: ServiceItem }> = ({ service }) => {
   };
 
   return (
-    <StaggerItem className="h-full">
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsFocused(true)}
-        onMouseLeave={() => setIsFocused(false)}
-        className="group relative flex h-full flex-col p-8 rounded-2xl bg-zinc-950/40 border border-white/[0.08] overflow-hidden transition-all duration-300 hover:border-transparent"
-      >
-        {/* إضاءة خفيفة تتبع الماوس على حدود الكارت */}
-        <div
-          className="absolute inset-0 pointer-events-none transition-opacity duration-300 rounded-2xl"
-          style={{
-            opacity: isFocused ? 1 : 0,
-            background: `radial-gradient(350px circle at ${coords.x}px ${coords.y}px, rgba(255, 255, 255, 0.12), transparent 70%)`,
-          }}
-        />
+    <StaggerItem className="h-full border-r border-[#222429] last:border-r-0">
+  <div
+    ref={cardRef}
+    onMouseMove={handleMouseMove}
+    onMouseEnter={() => setIsFocused(true)}
+    onMouseLeave={() => setIsFocused(false)}
+    className="group relative flex h-full flex-col p-8 rounded-2xl overflow-hidden transition-all duration-300"
+  >
+    {/* محتوى الكارت */}
+    <div className="relative mb-8 flex flex-1 w-full items-center justify-center min-h-[200px] sm:min-h-[250px]">
+      <span className="absolute left-0 top-0 font-mono text-xs uppercase text-[#8A8F98] transition-colors duration-300 group-hover:text-white">
+        {service.fig}
+      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={service.icon}
+        alt=""
+        className={`h-[85%] w-[85%] object-contain transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
+      />
+    </div>
 
-        {/* طبقة خلفية داخلية سوداء عشان تظهر الحدود المضيئة بشكل نظيف */}
-        <div className="absolute inset-[1px] bg-black rounded-[15px] -z-10" />
-
-        {/* محتوى الكارت الأصلي */}
-        <div className="relative mb-8 flex flex-1 w-full items-center justify-center min-h-[200px] sm:min-h-[250px]">
-          <span className="absolute left-0 top-0 font-mono text-xs uppercase text-[#8A8F98] transition-colors duration-300 group-hover:text-white">
-            {service.fig}
-          </span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={service.icon}
-            alt=""
-            className={`h-[85%] w-[85%] object-contain transition-transform duration-500 ease-out group-hover:scale-105 ${service.imgClassName || ""}`}
-          />
-        </div>
-
-        <h3 className="mb-2 text-[16px] font-medium tracking-[-0.011em] text-white">
-          {service.title}
-        </h3>
-        <p className="max-w-[368px] text-[14px] leading-[1.6] tracking-[-0.011em] text-[#8A8F98]">
-          {service.description}
-        </p>
-      </div>
-    </StaggerItem>
+    <h3 className="mb-2 text-[16px] font-medium tracking-[-0.011em] text-white">
+      {service.title}
+    </h3>
+    <p className="max-w-[368px] text-[14px] leading-[1.6] tracking-[-0.011em] text-[#8A8F98]">
+      {service.description}
+    </p>
+  </div>
+</StaggerItem>
   );
 };
 
