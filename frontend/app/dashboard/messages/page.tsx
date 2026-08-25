@@ -12,7 +12,7 @@ import {
   XCircle,
   MessageSquare,
 } from "lucide-react";
-import { StaggerGroup, StaggerItem } from "../../components/StaggerGroup";
+import { StaggerGroup, StaggerItem } from "../../components/ui/StaggerGroup";
 import { authFetch } from "../../../lib/auth";
 
 interface Message {

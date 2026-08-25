@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Container from "./layout/Container";
-import TextReveal from "./ui/TextReveal";
+import Container from "../layout/Container";
+import TextReveal from "../ui/TextReveal";
 
 const VIDEOS = ["/takya.mp4", "/kingsfield.mp4", "/takya.mp4", "/kingsfield.mp4"];
 

@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Container from "./layout/Container";
+import Container from "../layout/Container";
 import Link from "next/link";
 import Image from "next/image";
-import FadeIn from "./FadeIn";
-import Magnetic from "./ui/Magnetic";
-import { AnimatedHeader } from "./AnimatedHeader";
+import FadeIn from "../ui/FadeIn";
+import Magnetic from "../ui/Magnetic";
+import { AnimatedHeader } from "../ui/AnimatedHeader";
 
 export default function Hero() {
   const imgContainerRef = useRef<HTMLDivElement>(null);

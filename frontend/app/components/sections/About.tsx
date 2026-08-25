@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import { StaggerGroup, StaggerItem } from "./StaggerGroup";
-import TextReveal from "./ui/TextReveal";
+import { StaggerGroup, StaggerItem } from "../ui/StaggerGroup";
+import TextReveal from "../ui/TextReveal";
 
 const AboutSection: FC = () => {
   return (
