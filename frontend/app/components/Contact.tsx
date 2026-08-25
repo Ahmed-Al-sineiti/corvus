@@ -17,7 +17,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="w-full bg-black min-h-screen py-20 px-6 md:px-12 lg:px-24 font-sans text-white">
+    <section id="contact" className="w-full bg-black min-h-screen py-20 px-6 md:px-12 lg:px-24 font-sans text-white">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
         {/* العمود الأيسر: النصوص والخطوات كارد الحجز */}
         <div className="flex flex-col justify-between">
