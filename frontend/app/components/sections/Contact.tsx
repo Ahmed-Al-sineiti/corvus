@@ -22,7 +22,7 @@ export default function ContactSection() {
         {/* العمود الأيسر: النصوص والخطوات كارد الحجز */}
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans tracking-tight mb-6">
               Let&apos;s get in touch
             </h1>
             <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-10 max-w-md">
@@ -85,11 +85,11 @@ export default function ContactSection() {
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 group/step">
-                    <span className="flex-shrink-0 font-mono text-xs text-zinc-500 pt-0.5 transition-colors group-hover/step:text-white">
+                    <span className="flex-shrink-0 font-mono text-xs text-zinc-500 pt-0.5 ">
                       {item.num}
                     </span>
                     <div>
-                      <h4 className="text-sm font-medium text-white mb-1 transition-colors group-hover/step:text-zinc-200">
+                      <h4 className="text-sm font-medium text-white mb-1  ">
                         {item.title}
                       </h4>
                       <p className="text-xs text-zinc-400 leading-relaxed">

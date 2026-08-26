@@ -15,7 +15,7 @@ export default function AboutSection() {
            <div className="max-w-2xl">
                       <TextReveal
                         as="h2"
-                        className="font-heading text-4xl font-medium leading-[1.29] tracking-[-0.0375em] text-white sm:text-5xl"
+                        className="font-heading text-4xl font-sans leading-[1.29] tracking-[-0.0375em] text-white sm:text-5xl"
                       >
                         Who we are
                       </TextReveal>

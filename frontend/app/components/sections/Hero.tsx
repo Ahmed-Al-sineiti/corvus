@@ -94,10 +94,10 @@ export default function Hero() {
           {/* Heading + paragraph */}
           <div className="mt-[-50px]">
             <FadeIn delay={0.1}>
-              <h1 className="font-heading mb-5 whitespace-nowrap text-[clamp(2rem,8vw,4.5rem)] font-normal leading-[1.1] tracking-tight text-white">
+              <h1 className="font-heading mb-5 whitespace-nowrap text-[clamp(2rem,8vw,4.5rem)] font-sans leading-[1.1] tracking-tight text-white">
                 Building Today’s
               </h1>
-              <h1 className="whitespace-nowrap font-heading text-[clamp(2rem,8vw,4.5rem)] font-normal leading-[1.1] tracking-tight text-white">
+              <h1 className="whitespace-nowrap font-heading text-[clamp(2rem,8vw,4.5rem)] font-sans leading-[1.1] tracking-tight text-white">
                 <AnimatedHeader />
               </h1>
             </FadeIn>

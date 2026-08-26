@@ -58,7 +58,7 @@ const ServicesSection: FC = () => {
           <div className="max-w-2xl">
             <TextReveal
               as="h2"
-              className="font-heading text-4xl font-medium leading-[1.29] tracking-[-0.0375em] text-white sm:text-5xl"
+              className="font-heading text-4xl font-sans leading-[1.29] tracking-[-0.0375em] text-white sm:text-5xl"
             >
               Our{"\n"}Services
             </TextReveal>
@@ -109,7 +109,7 @@ const ServiceCard: FC<{ service: ServiceItem }> = ({ service }) => {
   >
     {/* محتوى الكارت */}
     <div className="relative mb-8 flex flex-1 w-full items-center justify-center min-h-[200px] sm:min-h-[250px]">
-      <span className="absolute left-0 top-0 font-mono text-xs uppercase text-[#8A8F98] transition-colors duration-300 group-hover:text-white">
+      <span className="absolute left-0 top-0 font-mono text-xs uppercase text-[#8A8F98]   ">
         {service.fig}
       </span>
       {service.icon === "/services/software-development.svg" ? (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Container from "../layout/Container";
 import TextReveal from "../ui/TextReveal";
 
@@ -9,9 +9,6 @@ const VIDEOS = ["/takya.mp4", "/kingsfield.mp4", "/takya.mp4", "/kingsfield.mp4"
 export default function Projects() {
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
-
-  const [row1Slow, setRow1Slow] = useState(false);
-  const [row2Slow, setRow2Slow] = useState(false);
 
   const setRowSpeed = (
     containerRef: React.RefObject<HTMLDivElement | null>,
@@ -26,6 +23,25 @@ export default function Projects() {
     }
   };
 
+  // دالة مخصصة لرندر كل فيديو مع طبقة الـ Overlay الرمادية
+  const renderVideoItem = (src: string, key: string) => (
+    <div
+      key={key}
+      className="group relative h-[200px] w-[320px] shrink-0 overflow-hidden rounded-[16px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px]"
+    >
+      <video
+        src={src}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+      />
+      {/* طبقة التظليل/الفلتر الرمادي (تختفي عند الـ hover باستخدام group-hover:opacity-0) */}
+      <div className="absolute inset-0 bg-black/50 backdrop-grayscale transition-all duration-500 group-hover:bg-transparent group-hover:backdrop-grayscale-0 pointer-events-none" />
+    </div>
+  );
+
   return (
     <section
       id="projects"
@@ -36,7 +52,7 @@ export default function Projects() {
           <div className="max-w-2xl">
             <TextReveal
               as="h2"
-              className="font-heading text-4xl font-medium leading-[1.29] tracking-[-0.0375em] text-white sm:text-5xl"
+              className="font-heading text-4xl font-sans leading-[1.29] tracking-[-0.0375em] text-white sm:text-5xl"
             >
               Selected{"\n"}Works
             </TextReveal>
@@ -76,7 +92,6 @@ export default function Projects() {
             width: max-content;
             user-select: none;
             gap: var(--marquee-gap);
-            cursor: pointer;
           }
           @media (min-width: 640px) {
             .marquee-wrapper {
@@ -103,45 +118,14 @@ export default function Projects() {
         <div
           ref={row1Ref}
           className="marquee-wrapper"
-          onClick={() => {
-            const nextState = !row1Slow;
-            setRow1Slow(nextState);
-            setRowSpeed(row1Ref, nextState ? 0.35 : 1);
-          }}
           onMouseEnter={() => setRowSpeed(row1Ref, 0.35)}
-          onMouseLeave={() => {
-            if (!row1Slow) setRowSpeed(row1Ref, 1);
-          }}
-          onTouchStart={() => setRowSpeed(row1Ref, 0.35)}
-          onTouchEnd={() => {
-            if (!row1Slow) setRowSpeed(row1Ref, 1);
-          }}
+          onMouseLeave={() => setRowSpeed(row1Ref, 1)}
         >
           <div className="animate-marquee-right">
-            {VIDEOS.map((src, idx) => (
-              <video
-                key={`row1-a-${idx}`}
-                src={src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-[200px] rounded-[16px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
-              />
-            ))}
+            {VIDEOS.map((src, idx) => renderVideoItem(src, `row1-a-${idx}`))}
           </div>
           <div className="animate-marquee-right" aria-hidden="true">
-            {VIDEOS.map((src, idx) => (
-              <video
-                key={`row1-b-${idx}`}
-                src={src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-[200px] rounded-[16px] w-[320px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
-              />
-            ))}
+            {VIDEOS.map((src, idx) => renderVideoItem(src, `row1-b-${idx}`))}
           </div>
         </div>
 
@@ -149,45 +133,14 @@ export default function Projects() {
         <div
           ref={row2Ref}
           className="marquee-wrapper"
-          onClick={() => {
-            const nextState = !row2Slow;
-            setRow2Slow(nextState);
-            setRowSpeed(row2Ref, nextState ? 0.35 : 1);
-          }}
           onMouseEnter={() => setRowSpeed(row2Ref, 0.35)}
-          onMouseLeave={() => {
-            if (!row2Slow) setRowSpeed(row2Ref, 1);
-          }}
-          onTouchStart={() => setRowSpeed(row2Ref, 0.35)}
-          onTouchEnd={() => {
-            if (!row2Slow) setRowSpeed(row2Ref, 1);
-          }}
+          onMouseLeave={() => setRowSpeed(row2Ref, 1)}
         >
           <div className="animate-marquee-left">
-            {VIDEOS.map((src, idx) => (
-              <video
-                key={`row2-a-${idx}`}
-                src={src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-[200px] w-[320px] rounded-[16px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
-              />
-            ))}
+            {VIDEOS.map((src, idx) => renderVideoItem(src, `row2-a-${idx}`))}
           </div>
           <div className="animate-marquee-left" aria-hidden="true">
-            {VIDEOS.map((src, idx) => (
-              <video
-                key={`row2-b-${idx}`}
-                src={src}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="h-[200px] w-[320px] rounded-[16px] sm:h-[360px] sm:w-[580px] lg:h-[460px] lg:w-[740px] shrink-0 object-cover"
-              />
-            ))}
+            {VIDEOS.map((src, idx) => renderVideoItem(src, `row2-b-${idx}`))}
           </div>
         </div>
       </div>
