@@ -25,11 +25,11 @@ export default function Nav() {
             <div className="shrink-0">
               <Link href="/">
                 <Image
-                  src="/corvus.png"
-                  height={76}
+                  src="/logocor.svg"
+                  height={64}
                   width={143}
                   className="h-[48px] w-auto object-contain sm:h-[56px] lg:h-[64px]"
-                  alt="corvus logo"
+                  alt="Corvus"
                 />
               </Link>
             </div>

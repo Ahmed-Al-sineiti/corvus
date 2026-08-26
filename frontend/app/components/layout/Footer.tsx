@@ -91,15 +91,12 @@ export default function Footer() {
           {/* Brand — 3 columns */}
           <div className="lg:col-span-3">
             <Image
-              src="/logo.png"
+              src="/logocor.svg"
               alt="Corvus"
-              width={40}
-              height={40}
-              className="h-10 w-10 object-contain"
+              width={143}
+              height={64}
+              className="h-12 w-auto object-contain"
             />
-            <p className="font-heading mt-5 text-lg font-medium tracking-[0.3em] text-foreground sm:text-xl">
-              CORVUS
-            </p>
             <p className="font-sans mt-5 max-w-xs text-sm leading-relaxed text-foreground-secondary sm:max-w-sm">
               We design and build digital systems, applications, and experiences
               that drive real impact.
