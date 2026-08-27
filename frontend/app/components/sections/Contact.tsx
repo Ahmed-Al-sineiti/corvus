@@ -152,24 +152,6 @@ export default function ContactSection() {
         <div className="flex flex-col justify-start pt-2">
           <form className="space-y-10" onSubmit={handleSubmit}>
             {/* الإيميل */}
-            <div className="flex flex-col gap-2 relative group">
-              <label
-                htmlFor="email"
-                className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                id="email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                placeholder="Type your email"
-                className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
-              />
-            </div>
 
             {/* الاسم الأول والأخير */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -191,6 +173,7 @@ export default function ContactSection() {
                   className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
                 />
               </div>
+
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="lastName"
@@ -211,6 +194,24 @@ export default function ContactSection() {
               </div>
             </div>
 
+            <div className="flex flex-col gap-2 relative group">
+              <label
+                htmlFor="email"
+                className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                value={email}
+                id="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                placeholder="Type your email"
+                className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
+              />
+            </div>
             {/* الرسالة */}
             <div className="flex flex-col gap-2">
               <label
