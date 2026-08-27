@@ -46,4 +46,27 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.delete("/:id", authMiddleware, async (req, res) => {
+  try {
+    const { id } = req.body;
+    const deleteMessage = await prisma.message.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+    res.json({
+      message: "Message deleted successfully",
+      deleteMessage,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+      res.status(500).json({ message: error.message });
+    } else {
+      console.error("Unknown error:", error);
+      res.status(500).json({ message: "An unexpected error occurred" });
+    }
+  }
+});
+
 export default router;

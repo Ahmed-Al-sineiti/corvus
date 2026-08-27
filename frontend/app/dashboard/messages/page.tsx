@@ -13,6 +13,8 @@ import {
   MessageSquare,
   Briefcase,
   Calendar,
+  Trash2,
+  Search,
 } from "lucide-react";
 import { StaggerGroup, StaggerItem } from "../../components/ui/StaggerGroup";
 import { authFetch } from "../../../lib/auth";
@@ -33,6 +35,8 @@ export default function MessagesPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [deletingId, setDeletingId] = useState<number | null>(null);
 
   const fetchMessagesApi = async (): Promise<Message[]> => {
     const response = await authFetch(API_URL, {
@@ -66,6 +70,51 @@ export default function MessagesPage() {
   useEffect(() => {
     loadData();
   }, []);
+
+  // دالة الحذف والربط مع الـ API
+  const handleDelete = async (id: number) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this message?",
+    );
+    if (!confirmDelete) return;
+
+    setDeletingId(id);
+    try {
+      const response = await authFetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete the message.");
+      }
+
+      // إزالة الرسالة مباشرة من الـ state بعد نجاح الحذف
+      setMessages((prevMessages) => prevMessages.filter((m) => m.id !== id));
+    } catch (err) {
+      console.error("Error deleting message:", err);
+      alert("Could not delete message. Please try again.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  // دالة التصفية حسب نص البحث
+  const filteredMessages = messages.filter((msg) => {
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return true;
+
+    const fullName = `${msg.firstName} ${msg.lastName}`.toLowerCase();
+    const email = msg.email.toLowerCase();
+    const service = (msg.ServiceType || "").toLowerCase();
+    const messageContent = msg.message.toLowerCase();
+
+    return (
+      fullName.includes(query) ||
+      email.includes(query) ||
+      service.includes(query) ||
+      messageContent.includes(query)
+    );
+  });
 
   const formatDate = (iso: string) =>
     new Date(iso).toLocaleString("en-GB", {
@@ -117,7 +166,22 @@ export default function MessagesPage() {
           </button>
         </div>
 
-        <div className="mt-10">
+        {/* Search Input Bar */}
+        <div className="mt-8 relative">
+          <Search
+            className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground-muted"
+            strokeWidth={1.5}
+          />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by name, email, service, or keywords..."
+            className="w-full rounded-xl border border-border bg-surface/80 py-3 pl-11 pr-4 font-sans text-sm text-white placeholder-foreground-muted outline-none transition-colors focus:border-accent/50 focus:bg-surface"
+          />
+        </div>
+
+        <div className="mt-8">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-surface py-20">
               <Loader2
@@ -145,32 +209,34 @@ export default function MessagesPage() {
                 Try Again
               </button>
             </div>
-          ) : messages.length === 0 ? (
+          ) : filteredMessages.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-surface py-20">
               <Inbox
                 className="h-8 w-8 text-foreground-muted"
                 strokeWidth={1.5}
               />
               <p className="font-heading text-xl font-medium text-foreground">
-                No messages yet
+                {searchQuery ? "No matching messages" : "No messages yet"}
               </p>
               <p className="text-sm text-foreground-secondary">
-                Messages sent through the contact form will appear here.
+                {searchQuery
+                  ? "Try searching for a different keyword or name."
+                  : "Messages sent through the contact form will appear here."}
               </p>
             </div>
           ) : (
             <StaggerGroup className="flex flex-col gap-6">
               <div className="flex items-center justify-between border-b border-border/60 pb-3">
                 <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground-secondary">
-                  TOTAL: {messages.length}{" "}
+                  SHOWING: {filteredMessages.length} OF {messages.length}{" "}
                   {messages.length === 1 ? "MESSAGE" : "MESSAGES"}
                 </p>
               </div>
 
-              {messages.map((message) => (
+              {filteredMessages.map((message) => (
                 <StaggerItem key={message.id}>
                   <article className="group relative rounded-2xl border border-border bg-surface/80 p-6 transition-all duration-300 hover:border-accent/40 hover:bg-surface hover:shadow-lg md:p-7">
-                    {/* Header: User Info & Timestamp */}
+                    {/* Header: User Info, Timestamp & Delete Icon */}
                     <div className="flex flex-col justify-between gap-4 border-b border-border/50 pb-5 sm:flex-row sm:items-center">
                       <div className="flex items-center gap-4">
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent transition-colors group-hover:border-accent/40 group-hover:bg-accent/20">
@@ -193,19 +259,39 @@ export default function MessagesPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1.5 self-start rounded-md border border-border/60 bg-background/50 px-3 py-1.5 font-mono text-xs text-foreground-muted sm:self-center">
-                        <Calendar
-                          className="h-3.5 w-3.5 text-foreground-muted"
-                          strokeWidth={1.5}
-                        />
-                        {formatDate(message.createdAt)}
+                      <div className="flex items-center gap-3 self-start sm:self-center">
+                        <div className="flex items-center gap-1.5 rounded-md border border-border/60 bg-background/50 px-3 py-1.5 font-mono text-xs text-foreground-muted">
+                          <Calendar
+                            className="h-3.5 w-3.5 text-foreground-muted"
+                            strokeWidth={1.5}
+                          />
+                          {formatDate(message.createdAt)}
+                        </div>
+
+                        {/* Delete Button */}
+                        <button
+                          type="button"
+                          aria-label="Delete message"
+                          disabled={deletingId === message.id}
+                          onClick={() => handleDelete(message.id)}
+                          className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/60 bg-background/50 text-foreground-muted transition-all duration-200 hover:border-red-500/40 hover:bg-red-500/10 hover:text-red-400 disabled:opacity-40"
+                        >
+                          {deletingId === message.id ? (
+                            <Loader2
+                              className="h-4 w-4 animate-spin text-red-400"
+                              strokeWidth={1.5}
+                            />
+                          ) : (
+                            <Trash2 className="h-4 w-4" strokeWidth={1.5} />
+                          )}
+                        </button>
                       </div>
                     </div>
 
                     {/* Service Badges */}
                     {message.ServiceType && (
                       <div className="mt-4 flex flex-wrap items-center gap-2">
-                        <span className="flex items-center gap-1 font-mono text-[11px] font-medium tracking-wider text-foreground-muted uppercase">
+                        <span className="flex items-center gap-1 font-mono text-[11px] font-medium tracking-wider uppercase text-foreground-muted">
                           <Briefcase
                             className="h-3.5 w-3.5 text-accent"
                             strokeWidth={1.5}
