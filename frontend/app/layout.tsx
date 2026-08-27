@@ -3,7 +3,7 @@ import { Inter, Space_Grotesk, JetBrains_Mono, VT323 } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
-import icon from "./icon.svg";
+import icon from "./icon.ico";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",

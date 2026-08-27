@@ -35,6 +35,12 @@ app.use("/api/messages", messageRouter);
 app.use("/api/register",  validate(registerSchema) ,register);
 app.use("/api/login",validate(loginSchema) , login);
 
-app.listen(port, () => {
-  console.log(`API listening on port ${port}`);
-});
+// Vercel invokes the exported app as a serverless function.
+export default app;
+
+// Keep `npm run dev` working locally without starting a listener on Vercel.
+if (process.env.VERCEL !== "1") {
+  app.listen(port, () => {
+    console.log(`API listening on port ${port}`);
+  });
+}
