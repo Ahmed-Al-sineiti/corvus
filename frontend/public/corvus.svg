@@ -22,7 +22,7 @@
 	.st16{fill:#FFFFFF;stroke:#FFFFFF;stroke-miterlimit:10;}
 	.st17{fill:#FFFFFF;stroke:#010101;stroke-miterlimit:10;}
 </style>
-<rect y="0" width="200" height="200"/>
+<rect y="0" width="200" height="200" rx="32" ry="32"/>
 <g id="vector">
 	<g>
 		<path class="st0" d="M160.12,81.42c0.01-0.06,0.02-0.11,0.03-0.15c-0.01,0.01-0.01,0.01-0.02,0.02

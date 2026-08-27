@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "Corvus",
   description: "Premium Software Engineering Studio",
   icons: {
-    icon: [{ url: "/corvus.svg", type: "image/png", sizes: "512x512" }],
+    icon: [{ url: "/circleTab.png", type: "image/svg", sizes: "512x512" }],
   },
 };
 
