@@ -35,7 +35,7 @@ const stats = [
 
 export default function DashboardPage() {
   return (
-    <section className="relative flex-1 overflow-hidden bg-background bg-noise py-12 md:py-16">
+    <section className="relative flex-1 overflow-hidden bg-background py-12 md:py-16">
       <Container className="relative z-10">
         <div className="mb-8 flex items-baseline gap-2 font-mono">
           <span className="text-sm tracking-[0.7px] text-white">CORVUS</span>

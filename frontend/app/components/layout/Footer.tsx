@@ -85,7 +85,7 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative bg-background bg-noise pt-12 pb-16 md:pt-16 md:pb-20">
+    <footer className="relative bg-background pt-12 pb-16 md:pt-16 md:pb-20">
       <Container>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 border-t border-border pt-14">
           {/* Brand — 3 columns */}

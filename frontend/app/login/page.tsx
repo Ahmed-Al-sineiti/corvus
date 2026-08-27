@@ -101,7 +101,7 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="relative flex-1 overflow-hidden bg-background bg-noise py-12 md:py-16">
+    <section className="relative flex-1 overflow-hidden bg-background py-12 md:py-16">
       <Container className="relative z-10">
         <div className="mx-auto w-full max-w-md">
           <div className="mb-8 flex items-baseline gap-2 font-mono">
