@@ -81,8 +81,7 @@ ${ServiceType}
               <!-- Header & Logo -->
               <tr>
                 <td align="center" style="padding: 30px; border-bottom: 1px solid #222222; background-color: #0a0a0a;">
-                  <img src="https://corvus.is-a.dev/logocor.svg" alt="Corvus Logo" style="height: 45px; display: block;" />
-                </td>
+<img src="https://corvus.is-a.dev/logocor.svg" alt="Corvus Logo" style="height: 75px; width: auto; max-width: 100%; display: block;" />                </td>
               </tr>
 
               <!-- Email Body -->
