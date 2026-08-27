@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
   const { firstName, lastName, ServiceType, email, message } = req.body;
 
   try {
-    // 1. Save message to database
+    // Save message
     const newMessage = await prisma.message.create({
       data: {
         firstName,
@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
       },
     });
 
-    // 2. Telegram
+    // Telegram
     const telegramText = `
 📩 New Website Message
 
@@ -57,19 +57,13 @@ ${ServiceType}
 
     try {
       await sendTelegramMessage(telegramText);
-      console.log("Telegram notification sent successfully");
-    } catch (telegramError) {
-      console.error("Failed to send Telegram notification:", telegramError);
+      console.log("Telegram sent successfully");
+    } catch (error) {
+      console.error("Telegram failed:", error);
     }
 
-    // 3. Email
+    // Email
     try {
-      console.log("MAIL_TO:", process.env.MAIL_TO);
-      console.log(
-        "RESEND_API_KEY exists:",
-        Boolean(process.env.RESEND_API_KEY),
-      );
-
       const { data, error } = await resend.emails.send({
         from: "onboarding@resend.dev",
         to: process.env.MAIL_TO!,
@@ -93,7 +87,9 @@ ${ServiceType}
             ${ServiceType}
           </p>
 
-          <h3>Message:</h3>
+          <hr />
+
+          <h3>Message</h3>
 
           <p>
             ${message}
@@ -106,16 +102,16 @@ ${ServiceType}
       } else {
         console.log("Email sent successfully:", data);
       }
-    } catch (emailError) {
-      console.error("Email notification failed:", emailError);
+    } catch (error) {
+      console.error("Email failed:", error);
     }
 
-    // 4. Respond to frontend
-    res.status(201).json(newMessage);
+    // Return response only once
+    return res.status(201).json(newMessage);
   } catch (error) {
     console.error(error);
 
-    res.status(500).json({
+    return res.status(500).json({
       message: "Failed to create message!",
     });
   }
