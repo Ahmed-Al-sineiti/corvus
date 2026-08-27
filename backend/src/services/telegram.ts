@@ -1,10 +1,9 @@
-import { da } from "zod/locales";
-
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
-export async function sendTelegramMessage(text: any) {
+export async function sendTelegramMessage(text: string) {
   const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -15,12 +14,16 @@ export async function sendTelegramMessage(text: any) {
       text,
     }),
   });
+
   const data = await response.json();
+
+  console.log("Telegram response:", data);
 
   if (!response.ok || !data.ok) {
     throw new Error(
       `Telegram API Error: ${data.description || "Unknown error"}`,
     );
-    return data;
   }
+
+  return data;
 }
