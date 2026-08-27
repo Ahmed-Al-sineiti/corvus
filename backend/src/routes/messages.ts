@@ -28,7 +28,9 @@ router.get("/", authMiddleware, async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { firstName, lastName, ServiceType, email, message } = req.body;
+
   try {
+    // 1. Save message to database
     const newMessage = await prisma.message.create({
       data: {
         firstName,
@@ -39,6 +41,7 @@ router.post("/", async (req, res) => {
       },
     });
 
+    // 2. Telegram
     const telegramText = `
 📩 New Website Message
 
@@ -51,27 +54,28 @@ ${message}
 🌐 Service:
 ${ServiceType}
 `;
+
     try {
       await sendTelegramMessage(telegramText);
+      console.log("Telegram notification sent successfully");
     } catch (telegramError) {
       console.error("Failed to send Telegram notification:", telegramError);
     }
 
-    res.status(201).json(newMessage);
-  } catch (error) {
-    console.error(error);
+    // 3. Email
+    try {
+      console.log("MAIL_TO:", process.env.MAIL_TO);
+      console.log(
+        "RESEND_API_KEY exists:",
+        Boolean(process.env.RESEND_API_KEY),
+      );
 
-    res.status(500).json({
-      message: "Failed to create message!",
-    });
-  }
-  try {
-    const { data, error } = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: process.env.MAIL_TO!,
-      replyTo: email,
-      subject: `New Website Message - ${firstName} ${lastName}`,
-      html: `
+      const { data, error } = await resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: process.env.MAIL_TO!,
+        replyTo: email,
+        subject: `New Website Message - ${firstName} ${lastName}`,
+        html: `
           <h2>📩 New Website Message</h2>
 
           <p>
@@ -95,15 +99,25 @@ ${ServiceType}
             ${message}
           </p>
         `,
-    });
+      });
 
-    if (error) {
-      console.error("Resend error:", error);
-    } else {
-      console.log("Email sent:", data);
+      if (error) {
+        console.error("Resend error:", error);
+      } else {
+        console.log("Email sent successfully:", data);
+      }
+    } catch (emailError) {
+      console.error("Email notification failed:", emailError);
     }
+
+    // 4. Respond to frontend
+    res.status(201).json(newMessage);
   } catch (error) {
-    console.error("Email notification failed:", error);
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to create message!",
+    });
   }
 });
 
