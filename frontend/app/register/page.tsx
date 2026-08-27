@@ -9,7 +9,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const url = "/api/register";
+    const url = "http://localhost:5000/api/register";
 
     try {
       const response = await fetch(url, {
