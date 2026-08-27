@@ -90,7 +90,7 @@ export default function ContactSection() {
                   <PhoneCallIcon className="h-4 w-4" strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium text-white">
+                  <h4 className="text-sm font-sans text-white">
                     Book a Whatsapp call ?
                   </h4>
                   <p className="text-xs text-zinc-500 mt-0.5">
@@ -109,7 +109,7 @@ export default function ContactSection() {
             </div>
 
             <div>
-              <h3 className="text-xs tracking-widest text-zinc-500 uppercase font-mono mb-8">
+              <h3 className="text-xs tracking-widest text-zinc-500 uppercase font-sans mb-8">
                 What happens next
               </h3>
               <div className="space-y-8 max-w-md">
@@ -131,11 +131,11 @@ export default function ContactSection() {
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 group/step">
-                    <span className="flex-shrink-0 font-mono text-xs text-zinc-500 pt-0.5 ">
+                    <span className="flex-shrink-0 font-sans text-xs text-zinc-500 pt-0.5 ">
                       {item.num}
                     </span>
                     <div>
-                      <h4 className="text-sm font-medium text-white mb-1  ">
+                      <h4 className="text-sm font-sans text-white mb-1  ">
                         {item.title}
                       </h4>
                       <p className="text-xs text-zinc-400 leading-relaxed">
@@ -155,7 +155,7 @@ export default function ContactSection() {
             <div className="flex flex-col gap-2 relative group">
               <label
                 htmlFor="email"
-                className="text-xs font-mono tracking-wider text-zinc-400 uppercase"
+                className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
               >
                 Email
               </label>
@@ -176,7 +176,7 @@ export default function ContactSection() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="firstName"
-                  className="text-xs font-mono tracking-wider text-zinc-400 uppercase"
+                  className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
                 >
                   First Name
                 </label>
@@ -194,7 +194,7 @@ export default function ContactSection() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="lastName"
-                  className="text-xs font-mono tracking-wider text-zinc-400 uppercase"
+                  className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
                 >
                   Last Name
                 </label>
@@ -215,7 +215,7 @@ export default function ContactSection() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="message"
-                className="text-xs font-mono tracking-wider text-zinc-400 uppercase"
+                className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
               >
                 Message
               </label>
@@ -231,7 +231,6 @@ export default function ContactSection() {
               />
             </div>
 
-            {/* الخدمات المطلوبة (أزرار تفاعلية للتحديد Multi-select) */}
             <div className="space-y-4 pt-2">
               <p className="text-xs font-mono tracking-wider text-zinc-400 uppercase">
                 Services you&apos;re interested in
