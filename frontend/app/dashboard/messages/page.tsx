@@ -81,7 +81,7 @@ export default function MessagesPage() {
     });
 
   return (
-    <section className="relative flex-1 overflow-hidden bg-background bg-noise py-12 md:py-16">
+    <section className="relative flex-1 overflow-hidden bg-background py-12 md:py-16">
       <div className="mx-auto w-full max-w-[1200px] px-6 md:px-10 lg:px-20">
         <Link
           href="/dashboard"
