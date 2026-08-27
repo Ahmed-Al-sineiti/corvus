@@ -12,11 +12,11 @@ import {
   XCircle,
   MessageSquare,
   Briefcase,
+  Calendar,
 } from "lucide-react";
 import { StaggerGroup, StaggerItem } from "../../components/ui/StaggerGroup";
 import { authFetch } from "../../../lib/auth";
 
-// 1. تحديث الواجهة لتطابق Prisma Model الجديد
 interface Message {
   id: number;
   firstName: string;
@@ -49,19 +49,7 @@ export default function MessagesPage() {
     return response.json();
   };
 
-  useEffect(() => {
-    fetchMessagesApi()
-      .then((data) => setMessages(data))
-      .catch((err) => {
-        console.error("Error fetching messages:", err);
-        setError(
-          "Something went wrong while loading messages. Please try again.",
-        );
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
-
-  const handleRefresh = () => {
+  const loadData = () => {
     setIsLoading(true);
     setError(null);
     fetchMessagesApi()
@@ -74,6 +62,10 @@ export default function MessagesPage() {
       })
       .finally(() => setIsLoading(false));
   };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const formatDate = (iso: string) =>
     new Date(iso).toLocaleString("en-GB", {
@@ -109,13 +101,13 @@ export default function MessagesPage() {
               Messages
             </h1>
             <p className="font-sans mt-4 text-sm leading-relaxed text-foreground-secondary">
-              All messages received through the contact form.
+              All incoming client inquiries and submissions.
             </p>
           </div>
           <button
-            onClick={handleRefresh}
+            onClick={loadData}
             disabled={isLoading}
-            className="inline-flex items-center justify-center gap-2 border border-border bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-300 hover:bg-accent hover:text-white hover:shadow-[0_8px_30px_-8px_rgba(90,108,255,0.6)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-black"
+            className="inline-flex items-center justify-center gap-2 border border-border bg-white px-6 py-3 text-sm font-medium text-black transition-all duration-300 hover:bg-accent hover:text-white hover:shadow-[0_8px_30px_-8px_rgba(90,108,255,0.6)] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <RefreshCw
               className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
@@ -146,7 +138,7 @@ export default function MessagesPage() {
                 {error}
               </p>
               <button
-                onClick={handleRefresh}
+                onClick={loadData}
                 className="inline-flex items-center gap-2 border border-border px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:border-border-strong hover:bg-background-secondary"
               >
                 <RefreshCw className="h-4 w-4" strokeWidth={1.5} />
@@ -167,51 +159,65 @@ export default function MessagesPage() {
               </p>
             </div>
           ) : (
-            <StaggerGroup className="flex flex-col gap-4">
-              <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground-secondary">
-                {messages.length}{" "}
-                {messages.length === 1 ? "MESSAGE" : "MESSAGES"}
-              </p>
+            <StaggerGroup className="flex flex-col gap-6">
+              <div className="flex items-center justify-between border-b border-border/60 pb-3">
+                <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground-secondary">
+                  TOTAL: {messages.length}{" "}
+                  {messages.length === 1 ? "MESSAGE" : "MESSAGES"}
+                </p>
+              </div>
+
               {messages.map((message) => (
                 <StaggerItem key={message.id}>
-                  <article className="rounded-2xl border border-border bg-surface p-6 transition-colors duration-300 hover:border-border-strong md:p-8">
-                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-border text-accent">
-                          <User className="h-4 w-4" strokeWidth={1.5} />
+                  <article className="group relative rounded-2xl border border-border bg-surface/80 p-6 transition-all duration-300 hover:border-accent/40 hover:bg-surface hover:shadow-lg md:p-7">
+                    {/* Header: User Info & Timestamp */}
+                    <div className="flex flex-col justify-between gap-4 border-b border-border/50 pb-5 sm:flex-row sm:items-center">
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/10 text-accent transition-colors group-hover:border-accent/40 group-hover:bg-accent/20">
+                          <User className="h-5 w-5" strokeWidth={1.75} />
                         </div>
                         <div>
-                          {/* 2. دمج الاسم الأول والأخير */}
-                          <p className="font-heading text-base font-medium text-foreground">
+                          <h2 className="font-heading text-lg font-semibold tracking-tight text-white">
                             {message.firstName} {message.lastName}
-                          </p>
+                          </h2>
                           <a
                             href={`mailto:${message.email}`}
-                            className="flex items-center gap-1.5 text-xs text-foreground-secondary transition-colors duration-300 hover:text-accent"
+                            className="mt-0.5 flex items-center gap-1.5 font-mono text-xs text-foreground-secondary transition-colors duration-200 hover:text-accent hover:underline"
                           >
-                            <Mail className="h-3.5 w-3.5" strokeWidth={1.5} />
+                            <Mail
+                              className="h-3.5 w-3.5 text-accent/80"
+                              strokeWidth={1.5}
+                            />
                             {message.email}
                           </a>
                         </div>
                       </div>
-                      <p className="font-mono text-xs text-foreground-muted">
-                        {formatDate(message.createdAt)}
-                      </p>
-                    </div>
 
-                    {/* 3. عرض نوع الخدمة (ServiceType) */}
-                    {message.ServiceType && (
-                      <div className="mt-4 flex items-center gap-2">
-                        <Briefcase
-                          className="h-3.5 w-3.5 text-accent shrink-0"
+                      <div className="flex items-center gap-1.5 self-start rounded-md border border-border/60 bg-background/50 px-3 py-1.5 font-mono text-xs text-foreground-muted sm:self-center">
+                        <Calendar
+                          className="h-3.5 w-3.5 text-foreground-muted"
                           strokeWidth={1.5}
                         />
+                        {formatDate(message.createdAt)}
+                      </div>
+                    </div>
+
+                    {/* Service Badges */}
+                    {message.ServiceType && (
+                      <div className="mt-4 flex flex-wrap items-center gap-2">
+                        <span className="flex items-center gap-1 font-mono text-[11px] font-medium tracking-wider text-foreground-muted uppercase">
+                          <Briefcase
+                            className="h-3.5 w-3.5 text-accent"
+                            strokeWidth={1.5}
+                          />
+                          Services:
+                        </span>
                         <div className="flex flex-wrap gap-1.5">
                           {message.ServiceType.split(",").map(
                             (service, idx) => (
                               <span
                                 key={idx}
-                                className="rounded-full border border-border bg-background-secondary px-2.5 py-0.5 text-[11px] font-mono text-foreground-secondary"
+                                className="rounded-lg border border-accent/20 bg-accent/5 px-3 py-1 font-mono text-xs text-accent-light transition-colors group-hover:border-accent/30"
                               >
                                 {service.trim()}
                               </span>
@@ -221,12 +227,16 @@ export default function MessagesPage() {
                       </div>
                     )}
 
-                    <div className="mt-5 flex items-start gap-3 border-t border-border pt-5">
-                      <MessageSquare
-                        className="mt-0.5 h-4 w-4 shrink-0 text-foreground-muted"
-                        strokeWidth={1.5}
-                      />
-                      <p className="text-sm leading-relaxed text-foreground-secondary">
+                    {/* Message Body Content */}
+                    <div className="mt-5 rounded-xl border border-border/50 bg-background/60 p-4 transition-colors group-hover:border-border">
+                      <div className="mb-2 flex items-center gap-2 text-xs font-medium text-foreground-muted">
+                        <MessageSquare
+                          className="h-3.5 w-3.5 text-accent"
+                          strokeWidth={1.5}
+                        />
+                        <span>Message Content</span>
+                      </div>
+                      <p className="whitespace-pre-wrap font-sans text-sm leading-relaxed text-foreground/90">
                         {message.message}
                       </p>
                     </div>
