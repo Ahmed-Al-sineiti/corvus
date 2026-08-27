@@ -27,9 +27,6 @@ const vt323 = VT323({
 export const metadata: Metadata = {
   title: "Corvus",
   description: "Premium Software Engineering Studio",
-  icons: {
-    icon: [{ url: "/corvus.svg", type: "image/svg", sizes: "512x512" }],
-  },
 };
 
 export default function RootLayout({
