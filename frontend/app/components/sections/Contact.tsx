@@ -240,7 +240,6 @@ export default function ContactSection() {
                 {[
                   "UI/UX Design",
                   "Web Development",
-                  "Mobile Apps",
                   "SEO Optimization",
                   "Maintenance",
                 ].map((service) => {

@@ -4,7 +4,12 @@ import { useRef } from "react";
 import Container from "../layout/Container";
 import TextReveal from "../ui/TextReveal";
 
-const VIDEOS = ["https://res.cloudinary.com/oilun9qx/video/upload/v1787795664/takya.mp4", "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4", "https://res.cloudinary.com/oilun9qx/video/upload/v1787795664/takya.mp4", "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4"];
+const VIDEOS = [
+  "https://res.cloudinary.com/oilun9qx/video/upload/v1787795664/takya.mp4",
+  "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4",
+  "https://res.cloudinary.com/oilun9qx/video/upload/v1787795664/takya.mp4",
+  "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4",
+];
 
 export default function Projects() {
   const row1Ref = useRef<HTMLDivElement>(null);
@@ -12,7 +17,7 @@ export default function Projects() {
 
   const setRowSpeed = (
     containerRef: React.RefObject<HTMLDivElement | null>,
-    speed: number
+    speed: number,
   ) => {
     if (!containerRef.current) return;
     if (typeof containerRef.current.getAnimations === "function") {
@@ -23,7 +28,6 @@ export default function Projects() {
     }
   };
 
-  // دالة مخصصة لرندر كل فيديو مع طبقة الـ Overlay الرمادية
   const renderVideoItem = (src: string, key: string) => (
     <div
       key={key}
@@ -37,7 +41,6 @@ export default function Projects() {
         playsInline
         className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
       />
-      {/* طبقة التظليل/الفلتر الرمادي (تختفي عند الـ hover باستخدام group-hover:opacity-0) */}
       <div className="absolute inset-0 bg-black/50 backdrop-grayscale transition-all duration-500 group-hover:bg-transparent group-hover:backdrop-grayscale-0 pointer-events-none" />
     </div>
   );
