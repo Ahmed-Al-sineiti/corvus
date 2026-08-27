@@ -24,11 +24,13 @@ router.get("/", authMiddleware, async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { firstName, lastName, ServiceType, email, message } = req.body;
 
     const newMessage = await prisma.message.create({
       data: {
-        name,
+        firstName,
+        lastName,
+        ServiceType,
         email,
         message,
       },

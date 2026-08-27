@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {PhoneCallIcon} from "lucide-react";
+import { PhoneCallIcon } from "lucide-react";
 
 export default function ContactSection() {
-  // حالة لحفظ الخدمات المحددة
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
   const toggleService = (service: string) => {
     if (selectedServices.includes(service)) {
@@ -16,8 +19,52 @@ export default function ContactSection() {
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (selectedServices.length === 0) {
+      alert("Please select at least one service.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          firstName,
+          lastName,
+          message,
+          ServiceType: selectedServices.join(", "),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || "Something went wrong!");
+      } else {
+        alert("Message sent successfully!");
+
+        setEmail("");
+        setFirstName("");
+        setLastName("");
+        setMessage("");
+        setSelectedServices([]);
+      }
+    } catch (error) {
+      alert("Failed to connect to the server.");
+      console.error(error);
+    }
+  };
   return (
-    <section id="contact" className="w-full bg-black min-h-screen py-20 px-6 md:px-12 lg:px-24 font-sans text-white">
+    <section
+      id="contact"
+      className="w-full bg-black min-h-screen py-20 px-6 md:px-12 lg:px-24 font-sans text-white"
+    >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
         {/* العمود الأيسر: النصوص والخطوات كارد الحجز */}
         <div className="flex flex-col justify-between">
@@ -40,7 +87,7 @@ export default function ContactSection() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                   </span>
-                 <PhoneCallIcon className="h-4 w-4" strokeWidth={1.5} />
+                  <PhoneCallIcon className="h-4 w-4" strokeWidth={1.5} />
                 </div>
                 <div>
                   <h4 className="text-sm font-medium text-white">
@@ -61,7 +108,6 @@ export default function ContactSection() {
               </Link>
             </div>
 
-            {/* مراحل العمل الاحترافية (What happens next?) */}
             <div>
               <h3 className="text-xs tracking-widest text-zinc-500 uppercase font-mono mb-8">
                 What happens next
@@ -103,9 +149,8 @@ export default function ContactSection() {
           </div>
         </div>
 
-        {/* العمود الأيمن: نموذج التواصل التفاعلي */}
         <div className="flex flex-col justify-start pt-2">
-          <form className="space-y-10" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-10" onSubmit={handleSubmit}>
             {/* الإيميل */}
             <div className="flex flex-col gap-2 relative group">
               <label
@@ -116,7 +161,11 @@ export default function ContactSection() {
               </label>
               <input
                 type="email"
+                value={email}
                 id="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 placeholder="Type your email"
                 className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
               />
@@ -133,7 +182,11 @@ export default function ContactSection() {
                 </label>
                 <input
                   type="text"
+                  value={firstName}
                   id="firstName"
+                  onChange={(e) => {
+                    setFirstName(e.target.value);
+                  }}
                   placeholder="Type your first name"
                   className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
                 />
@@ -147,7 +200,11 @@ export default function ContactSection() {
                 </label>
                 <input
                   type="text"
+                  value={lastName}
                   id="lastName"
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                  }}
                   placeholder="Type your last name"
                   className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
                 />
@@ -164,8 +221,12 @@ export default function ContactSection() {
               </label>
               <textarea
                 id="message"
+                value={message}
                 placeholder="Tell us more about your project"
                 rows={1}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
                 className="w-full bg-transparent border-b border-zinc-800 pb-12 pt-2 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300 resize-none"
               />
             </div>
@@ -202,7 +263,6 @@ export default function ContactSection() {
               </div>
             </div>
 
-            {/* زر الإرسال والموافقة */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 border-t border-zinc-900">
               <p className="text-zinc-500 text-xs">
                 By clicking &quot;Send Message&quot; you accept our{" "}

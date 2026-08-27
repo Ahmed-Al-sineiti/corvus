@@ -10,29 +10,6 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 
-const stats = [
-  {
-    icon: <Inbox className="h-5 w-5" strokeWidth={1.5} />,
-    label: "TOTAL MESSAGES",
-    value: "View inbox",
-  },
-  {
-    icon: <Users className="h-5 w-5" strokeWidth={1.5} />,
-    label: "CLIENTS",
-    value: "Coming soon",
-  },
-  {
-    icon: <Mail className="h-5 w-5" strokeWidth={1.5} />,
-    label: "EMAILS",
-    value: "Coming soon",
-  },
-  {
-    icon: <Clock className="h-5 w-5" strokeWidth={1.5} />,
-    label: "REPLY TIME",
-    value: "< 24h",
-  },
-];
-
 export default function DashboardPage() {
   return (
     <section className="relative flex-1 overflow-hidden bg-background py-12 md:py-16">
@@ -55,28 +32,13 @@ export default function DashboardPage() {
             </p>
           </div>
           <div className="flex items-center gap-2 font-mono text-xs text-foreground-secondary">
-            <LayoutDashboard className="h-4 w-4 text-accent" strokeWidth={1.5} />
+            <LayoutDashboard
+              className="h-4 w-4 text-accent"
+              strokeWidth={1.5}
+            />
             OVERVIEW
           </div>
         </div>
-
-        <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <StaggerItem key={stat.label}>
-              <div className="rounded-2xl border border-border bg-surface p-6 transition-colors duration-300 hover:border-border-strong">
-                <div className="flex h-11 w-11 items-center justify-center border border-border text-accent">
-                  {stat.icon}
-                </div>
-                <p className="font-mono mt-5 text-[11px] font-medium tracking-[0.2em] text-foreground-secondary">
-                  {stat.label}
-                </p>
-                <p className="font-heading mt-2 text-2xl font-medium text-foreground">
-                  {stat.value}
-                </p>
-              </div>
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
 
         <Link
           href="/dashboard/messages"
@@ -95,7 +57,10 @@ export default function DashboardPage() {
           </div>
           <div className="relative inline-flex items-center gap-2 border border-border px-6 py-3 text-sm font-medium text-foreground transition-all duration-300 group-hover:border-accent/60 group-hover:bg-accent group-hover:text-white">
             Open Inbox
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
+            <ArrowRight
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+              strokeWidth={1.5}
+            />
           </div>
         </Link>
       </Container>

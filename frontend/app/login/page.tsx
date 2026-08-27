@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import {
   Eye,
@@ -12,8 +12,6 @@ import {
   XCircle,
 } from "lucide-react";
 import Container from "../components/layout/Container";
-
-const API_URL = "http://localhost:5000/api/login";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,17 +33,20 @@ export default function LoginPage() {
     setAlert(null);
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch("/api/login", {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
         },
+
         body: JSON.stringify({
           email,
           password,
         }),
       });
 
+      // نتأكد إن الـ Backend رجّع JSON
       const contentType = response.headers.get("content-type");
 
       if (!contentType?.includes("application/json")) {
@@ -56,26 +57,59 @@ export default function LoginPage() {
         throw new Error("Invalid response from server");
       }
 
+      // نحول الـ response إلى JSON
       const data = await response.json();
 
       console.log("Login response:", data);
 
-      if (!response.ok) {
-        throw new Error(data.message || "Invalid email or password");
+      // =========================
+      // Login Successful
+      // =========================
+      if (response.ok) {
+        // نتأكد إن الـ Backend رجّع token
+        if (!data.token) {
+          throw new Error("Login succeeded but no token was returned");
+        }
+
+        // نخزن الـ token
+        localStorage.setItem("token", data.token);
+
+        // نظهر رسالة نجاح
+        setAlert({
+          type: "success",
+          message: "Login successful. Redirecting...",
+        });
+
+        // ننتقل للـ dashboard
+        router.replace("/dashboard");
       }
 
-      if (!data.token) {
-        throw new Error("Login succeeded but no token was returned");
+      // =========================
+      // Zod Validation Errors
+      // =========================
+      else if (data.errors) {
+        // نحول كل أخطاء Zod إلى messages
+        const messages = data.errors.map(
+          (error: { path: string[]; message: string }) =>
+            `${error.path[0]}: ${error.message}`,
+        );
+
+        // نظهر الأخطاء في الـ Alert الموجود في الصفحة
+        setAlert({
+          type: "error",
+          message: messages.join(" | "),
+        });
       }
 
-      localStorage.setItem("token", data.token);
-
-      setAlert({
-        type: "success",
-        message: "Login successful. Redirecting...",
-      });
-
-      router.replace("/dashboard");
+      // =========================
+      // Other Backend Errors
+      // =========================
+      else {
+        setAlert({
+          type: "error",
+          message: data.message || "Invalid email or password",
+        });
+      }
     } catch (error) {
       console.error("Error logging in:", error);
 

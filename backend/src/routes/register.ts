@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
           password: hashedPassword,
         },
       });
-
+      
       return res.status(201).json({ message: "User created successfully" });
     } else {
       return res.status(400).json({ message: "Email already exists" });

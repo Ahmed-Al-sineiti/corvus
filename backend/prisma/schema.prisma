@@ -14,9 +14,11 @@ datasource db {
 
 model Message {
   id Int @id @default(autoincrement())
-  name String
+  firstName String
+  lastName String
   email String
   message String
+  ServiceType String
   createdAt DateTime @default(now())
 }
 

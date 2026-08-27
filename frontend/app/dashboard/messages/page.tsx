@@ -11,19 +11,23 @@ import {
   Loader2,
   XCircle,
   MessageSquare,
+  Briefcase,
 } from "lucide-react";
 import { StaggerGroup, StaggerItem } from "../../components/ui/StaggerGroup";
 import { authFetch } from "../../../lib/auth";
 
+// 1. تحديث الواجهة لتطابق Prisma Model الجديد
 interface Message {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   message: string;
+  ServiceType: string;
   createdAt: string;
 }
 
-const API_URL = "http://localhost:5000/api/messages";
+const API_URL = "/api/messages";
 
 export default function MessagesPage() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -51,7 +55,7 @@ export default function MessagesPage() {
       .catch((err) => {
         console.error("Error fetching messages:", err);
         setError(
-          "Something went wrong while loading messages. Make sure the API server is running on port 5000."
+          "Something went wrong while loading messages. Please try again.",
         );
       })
       .finally(() => setIsLoading(false));
@@ -65,7 +69,7 @@ export default function MessagesPage() {
       .catch((err) => {
         console.error("Error fetching messages:", err);
         setError(
-          "Something went wrong while loading messages. Make sure the API server is running on port 5000."
+          "Something went wrong while loading messages. Please try again.",
         );
       })
       .finally(() => setIsLoading(false));
@@ -94,7 +98,9 @@ export default function MessagesPage() {
         <div className="mt-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <div className="flex items-baseline gap-2 font-mono">
-              <span className="text-sm tracking-[0.7px] text-white">CORVUS</span>
+              <span className="text-sm tracking-[0.7px] text-white">
+                CORVUS
+              </span>
               <span className="text-xs font-medium tracking-[0.2em] text-accent">
                 INBOX
               </span>
@@ -122,7 +128,10 @@ export default function MessagesPage() {
         <div className="mt-10">
           {isLoading ? (
             <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-surface py-20">
-              <Loader2 className="h-6 w-6 animate-spin text-accent" strokeWidth={1.5} />
+              <Loader2
+                className="h-6 w-6 animate-spin text-accent"
+                strokeWidth={1.5}
+              />
               <p className="font-mono text-xs tracking-[0.2em] text-foreground-secondary">
                 LOADING MESSAGES...
               </p>
@@ -146,7 +155,10 @@ export default function MessagesPage() {
             </div>
           ) : messages.length === 0 ? (
             <div className="flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-surface py-20">
-              <Inbox className="h-8 w-8 text-foreground-muted" strokeWidth={1.5} />
+              <Inbox
+                className="h-8 w-8 text-foreground-muted"
+                strokeWidth={1.5}
+              />
               <p className="font-heading text-xl font-medium text-foreground">
                 No messages yet
               </p>
@@ -157,21 +169,21 @@ export default function MessagesPage() {
           ) : (
             <StaggerGroup className="flex flex-col gap-4">
               <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground-secondary">
-                {messages.length} {messages.length === 1 ? "MESSAGE" : "MESSAGES"}
+                {messages.length}{" "}
+                {messages.length === 1 ? "MESSAGE" : "MESSAGES"}
               </p>
               {messages.map((message) => (
                 <StaggerItem key={message.id}>
-                  <article
-                    className="rounded-2xl border border-border bg-surface p-6 transition-colors duration-300 hover:border-border-strong md:p-8"
-                  >
+                  <article className="rounded-2xl border border-border bg-surface p-6 transition-colors duration-300 hover:border-border-strong md:p-8">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex items-center gap-3">
                         <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-border text-accent">
                           <User className="h-4 w-4" strokeWidth={1.5} />
                         </div>
                         <div>
+                          {/* 2. دمج الاسم الأول والأخير */}
                           <p className="font-heading text-base font-medium text-foreground">
-                            {message.name}
+                            {message.firstName} {message.lastName}
                           </p>
                           <a
                             href={`mailto:${message.email}`}
@@ -186,6 +198,29 @@ export default function MessagesPage() {
                         {formatDate(message.createdAt)}
                       </p>
                     </div>
+
+                    {/* 3. عرض نوع الخدمة (ServiceType) */}
+                    {message.ServiceType && (
+                      <div className="mt-4 flex items-center gap-2">
+                        <Briefcase
+                          className="h-3.5 w-3.5 text-accent shrink-0"
+                          strokeWidth={1.5}
+                        />
+                        <div className="flex flex-wrap gap-1.5">
+                          {message.ServiceType.split(",").map(
+                            (service, idx) => (
+                              <span
+                                key={idx}
+                                className="rounded-full border border-border bg-background-secondary px-2.5 py-0.5 text-[11px] font-mono text-foreground-secondary"
+                              >
+                                {service.trim()}
+                              </span>
+                            ),
+                          )}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="mt-5 flex items-start gap-3 border-t border-border pt-5">
                       <MessageSquare
                         className="mt-0.5 h-4 w-4 shrink-0 text-foreground-muted"
