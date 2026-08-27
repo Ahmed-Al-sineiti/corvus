@@ -48,12 +48,14 @@ router.post("/", async (req, res) => {
 
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
+
     const deleteMessage = await prisma.message.delete({
       where: {
         id: Number(id),
       },
     });
+
     res.json({
       message: "Message deleted successfully",
       deleteMessage,
@@ -68,5 +70,4 @@ router.delete("/:id", authMiddleware, async (req, res) => {
     }
   }
 });
-
 export default router;
