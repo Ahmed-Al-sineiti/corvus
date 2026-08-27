@@ -2,6 +2,9 @@ import { Router } from "express";
 import prisma from "../lib/prisma.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { sendTelegramMessage } from "../services/telegram.js";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const router = Router();
 
@@ -25,7 +28,6 @@ router.get("/", authMiddleware, async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { firstName, lastName, ServiceType, email, message } = req.body;
-
   try {
     const newMessage = await prisma.message.create({
       data: {
@@ -49,7 +51,6 @@ ${message}
 🌐 Service:
 ${ServiceType}
 `;
-
     try {
       await sendTelegramMessage(telegramText);
     } catch (telegramError) {
@@ -63,6 +64,46 @@ ${ServiceType}
     res.status(500).json({
       message: "Failed to create message!",
     });
+  }
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: process.env.MAIL_TO!,
+      replyTo: email,
+      subject: `New Website Message - ${firstName} ${lastName}`,
+      html: `
+          <h2>📩 New Website Message</h2>
+
+          <p>
+            <strong>Name:</strong>
+            ${firstName} ${lastName}
+          </p>
+
+          <p>
+            <strong>Email:</strong>
+            ${email}
+          </p>
+
+          <p>
+            <strong>Service:</strong>
+            ${ServiceType}
+          </p>
+
+          <h3>Message:</h3>
+
+          <p>
+            ${message}
+          </p>
+        `,
+    });
+
+    if (error) {
+      console.error("Resend error:", error);
+    } else {
+      console.log("Email sent:", data);
+    }
+  } catch (error) {
+    console.error("Email notification failed:", error);
   }
 });
 
