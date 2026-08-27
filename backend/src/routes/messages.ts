@@ -1,6 +1,7 @@
 import { Router } from "express";
 import prisma from "../lib/prisma.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
+import { sendTelegramMessage } from "../services/telegram.js";
 
 const router = Router();
 
@@ -23,9 +24,9 @@ router.get("/", authMiddleware, async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  try {
-    const { firstName, lastName, ServiceType, email, message } = req.body;
+  const { firstName, lastName, ServiceType, email, message } = req.body;
 
+  try {
     const newMessage = await prisma.message.create({
       data: {
         firstName,
@@ -36,9 +37,28 @@ router.post("/", async (req, res) => {
       },
     });
 
+    const telegramText = `
+📩 New Website Message
+
+👤 Name: ${firstName} ${lastName}
+📧 Email: ${email}
+
+💬 Message:
+${message}
+
+🌐 Service:
+${ServiceType}
+`;
+
+    try {
+      await sendTelegramMessage(telegramText);
+    } catch (telegramError) {
+      console.error("Failed to send Telegram notification:", telegramError);
+    }
+
     res.status(201).json(newMessage);
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     res.status(500).json({
       message: "Failed to create message!",
