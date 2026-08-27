@@ -1,6 +1,6 @@
 "use client";
 
-import type { FC, MouseEvent } from "react";
+import type { FC } from "react";
 import { useState, useRef, useEffect } from "react";
 import { StaggerGroup, StaggerItem } from "../ui/StaggerGroup";
 import TextReveal from "../ui/TextReveal";
@@ -85,24 +85,11 @@ const ServicesSection: FC = () => {
 
 // مكون فرعي لكل كارت عشان يتحكم في إضاءة الماوس بشكل منفرد ونظيف
 const ServiceCard: FC<{ service: ServiceItem }> = ({ service }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [isFocused, setIsFocused] = useState(false);
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setCoords({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
 
   return (
     <StaggerItem className="h-full border-r border-[#222429] last:border-r-0">
   <div
-    ref={cardRef}
-    onMouseMove={handleMouseMove}
     onMouseEnter={() => setIsFocused(true)}
     onMouseLeave={() => setIsFocused(false)}
     className="group relative flex h-full flex-col p-8 rounded-2xl overflow-hidden transition-all duration-300"

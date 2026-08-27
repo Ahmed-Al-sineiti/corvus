@@ -3,7 +3,6 @@ import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
-import icon from "./icon.ico"
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -22,9 +21,6 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Corvus",
   description: "Premium Software Engineering Studio",
-  icons: {
-    icon: [{ url: "/corvus.svg", type: "image/png", sizes: "512x512" }],
-  },
 };
 
 export default function RootLayout({

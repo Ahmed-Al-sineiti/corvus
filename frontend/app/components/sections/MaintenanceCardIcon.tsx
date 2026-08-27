@@ -3,9 +3,8 @@
 import type { FC } from "react";
 
 /**
- * Generated from public/services/icon-card.svg — do not hand-edit the path
- * data below. Re-run scripts/gen-maintenance-icon (see git history) if the
- * source SVG changes.
+ * Hand-authored isometric card illustration — do not hand-edit the path
+ * data below without a design reference; regenerate it wholesale instead.
  */
 
 const LAYER_0_MARKUP = `<g clip-path="url(#clip0_80_2089)">
