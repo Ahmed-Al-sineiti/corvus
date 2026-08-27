@@ -70,31 +70,72 @@ ${ServiceType}
         replyTo: email,
         subject: `New Website Message - ${firstName} ${lastName}`,
         html: `
-          <h2>📩 New Website Message</h2>
+    <!DOCTYPE html>
+    <html lang="en">
+    <body style="margin: 0; padding: 0; background-color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #000000; padding: 40px 20px;">
+        <tr>
+          <td align="center">
+            <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #111111; border: 1px solid #222222; border-radius: 8px; overflow: hidden;">
+              
+              <!-- Header & Logo -->
+              <tr>
+                <td align="center" style="padding: 30px; border-bottom: 1px solid #222222; background-color: #0a0a0a;">
+                  <img src="https://corvus.is-a.dev/logocor.svg" alt="Corvus Logo" style="height: 45px; display: block;" />
+                </td>
+              </tr>
 
-          <p>
-            <strong>Name:</strong>
-            ${firstName} ${lastName}
-          </p>
+              <!-- Email Body -->
+              <tr>
+                <td style="padding: 30px; color: #ededed;">
+                  <h2 style="margin-top: 0; color: #ffffff; font-size: 20px;">New Website Inquiry</h2>
 
-          <p>
-            <strong>Email:</strong>
-            ${email}
-          </p>
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 25px;">
+                    <tr>
+                      <td style="padding: 12px 0; border-bottom: 1px solid #222222;">
+                        <span style="color: #888888; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Name</span><br/>
+                        <strong style="color: #ffffff; font-size: 16px;">${firstName} ${lastName}</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px 0; border-bottom: 1px solid #222222;">
+                        <span style="color: #888888; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Email</span><br/>
+                        <strong style="color: #ffffff; font-size: 16px;">
+                          <a href="mailto:${email}" style="color: #3b82f6; text-decoration: none;">${email}</a>
+                        </strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px 0; border-bottom: 1px solid #222222;">
+                        <span style="color: #888888; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Service Requested</span><br/>
+                        <strong style="color: #ffffff; font-size: 16px;">${ServiceType}</strong>
+                      </td>
+                    </tr>
+                  </table>
 
-          <p>
-            <strong>Service:</strong>
-            ${ServiceType}
-          </p>
+                  <!-- Message Box -->
+                  <h3 style="margin: 0 0 10px 0; color: #888888; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Message Details</h3>
+                  <div style="background-color: #050505; border: 1px solid #222222; border-radius: 6px; padding: 20px; color: #d4d4d4; line-height: 1.6; font-size: 15px; white-space: pre-wrap;">
+${message}
+                  </div>
 
-          <hr />
+                </td>
+              </tr>
 
-          <h3>Message</h3>
-
-          <p>
-            ${message}
-          </p>
-        `,
+              <!-- Footer -->
+              <tr>
+                <td align="center" style="padding: 20px; background-color: #0a0a0a; border-top: 1px solid #222222; color: #555555; font-size: 12px;">
+                  This message was sent from your website's contact form.
+                </td>
+              </tr>
+              
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `,
       });
 
       if (error) {
