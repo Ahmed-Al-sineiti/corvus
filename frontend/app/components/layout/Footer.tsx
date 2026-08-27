@@ -32,7 +32,7 @@ const columns: FooterColumn[] = [
 const contactPoints = [
   {
     icon: <Mail className="h-4 w-4" strokeWidth={1.5} />,
-    value: "hello@corvus.studio",
+    value: "crvs.agency@gmail.com",
   },
   {
     icon: <Phone className="h-4 w-4" strokeWidth={1.5} />,
