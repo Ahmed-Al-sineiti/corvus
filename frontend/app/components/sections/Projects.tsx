@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Container from "../layout/Container";
 import TextReveal from "../ui/TextReveal";
 
-const VIDEOS = ["/takya.mp4", "/kingsfield.mp4", "/takya.mp4", "/kingsfield.mp4"];
+const VIDEOS = ["https://res.cloudinary.com/oilun9qx/video/upload/v1787795664/takya.mp4", "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4", "https://res.cloudinary.com/oilun9qx/video/upload/v1787795664/takya.mp4", "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4"];
 
 export default function Projects() {
   const row1Ref = useRef<HTMLDivElement>(null);
