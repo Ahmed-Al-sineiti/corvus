@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, JetBrains_Mono, VT323 } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
@@ -18,6 +18,12 @@ const jetBrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 });
 
+const vt323 = VT323({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-vt323",
+});
+
 export const metadata: Metadata = {
   title: "Corvus",
   description: "Premium Software Engineering Studio",
@@ -32,7 +38,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} ${vt323.variable} antialiased`}
     >
       <body
         suppressHydrationWarning
