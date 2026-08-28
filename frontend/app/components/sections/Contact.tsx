@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { PhoneCallIcon, ShieldCheckIcon } from "lucide-react";
+import { PhoneCallIcon, ShieldCheckIcon, X } from "lucide-react";
 
 export default function ContactSection() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -10,6 +10,22 @@ export default function ContactSection() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const popoverRef = useRef<HTMLDivElement>(null);
+
+  // إغلاق النافذة العائمة عند الضغط خارجها في الموبايل
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        popoverRef.current &&
+        !popoverRef.current.contains(event.target as Node)
+      ) {
+        setIsPopoverOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const toggleService = (service: string) => {
     if (selectedServices.includes(service)) {
@@ -252,38 +268,58 @@ export default function ContactSection() {
               </div>
             </div>
 
-            {/* قسم الإرسال وحاوية الـ Privacy Policy Hover */}
+            {/* قسم الإرسال مع Popover يفتح للأسفل ويعمل على الهواتف */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 border-t border-zinc-900">
               <p className="text-zinc-500 text-xs">
                 By clicking &quot;Send Message&quot; you accept our{" "}
-                <span className="relative inline-block group/popover">
-                  <Link
-                    href="#contact"
-                    className="text-zinc-300 underline underline-offset-4 hover:text-white cursor-pointer transition-colors"
+                <span
+                  className="relative inline-block group/popover"
+                  ref={popoverRef}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+                    className="text-zinc-300 underline underline-offset-4 hover:text-white cursor-pointer transition-colors focus:outline-none"
                   >
                     Privacy Policy
-                  </Link>
+                  </button>
 
-                  {/* الـ Hover Card العائم */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-80 p-4 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-2xl opacity-0 invisible group-hover/popover:opacity-100 group-hover/popover:visible transition-all duration-200 pointer-events-none z-50">
-                    <div className="flex items-center gap-2 mb-2 pb-2 border-b border-zinc-800">
-                      <ShieldCheckIcon className="w-4 h-4 text-emerald-400" />
-                      <h5 className="text-xs font-semibold text-white">
-                        Privacy Summary
-                      </h5>
+                  {/* النافذة العائمة للأولويات (Hover للماوس + Click للموبايل + تفتح للأسفل) */}
+                  <div
+                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 sm:w-80 p-4 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-2xl transition-all duration-200 z-50 ${
+                      isPopoverOpen
+                        ? "opacity-100 visible pointer-events-auto"
+                        : "opacity-0 invisible pointer-events-none group-hover/popover:opacity-100 group-hover/popover:visible group-hover/popover:pointer-events-auto"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2 pb-2 border-b border-zinc-800">
+                      <div className="flex items-center gap-2">
+                        <ShieldCheckIcon className="w-4 h-4 text-emerald-400" />
+                        <h5 className="text-xs font-semibold text-white">
+                          Privacy Policy Summary
+                        </h5>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsPopoverOpen(false)}
+                        className="text-zinc-500 hover:text-white transition-colors"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
                     </div>
+
                     <p className="text-[11px] text-zinc-400 leading-relaxed mb-2">
                       We collect your name, email, and message details solely to
                       respond to your inquiry and plan your project.
                     </p>
                     <ul className="text-[10px] text-zinc-500 space-y-1 list-disc list-inside">
-                      <li>Strictly no third-party marketing sharing</li>
-                      <li>Encrypted & secure handling</li>
+                      <li>No third-party marketing sharing</li>
+                      <li>Encrypted & secure data handling</li>
                       <li>Request data removal anytime</li>
                     </ul>
 
-                    {/* سهم التوجيه السفلي */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-zinc-900/95"></div>
+                    {/* سهم التوجيه إلى الأعلى (لأن النافذة تفتح للأسفل) */}
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 border-8 border-transparent border-b-zinc-900/95"></div>
                   </div>
                 </span>
               </p>
