@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { PhoneCallIcon } from "lucide-react";
+import { PhoneCallIcon, ShieldCheckIcon } from "lucide-react";
 
 export default function ContactSection() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -60,13 +60,14 @@ export default function ContactSection() {
       console.error(error);
     }
   };
+
   return (
     <section
       id="contact"
       className="w-full bg-black min-h-screen py-20 px-6 md:px-12 lg:px-24 font-sans text-white"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-        {/* العمود الأيسر: النصوص والخطوات كارد الحجز */}
+        {/* العمود الأيسر */}
         <div className="flex flex-col justify-between">
           <div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-sans tracking-tight mb-6">
@@ -78,11 +79,10 @@ export default function ContactSection() {
               can bring your project to life today.
             </p>
 
-            {/* كارت حجز مكالمة مباشرة (Direct Booking Card) مع لمسة نبض حية */}
+            {/* Direct Booking Card */}
             <div className="group relative flex items-center justify-between border border-zinc-800/80 bg-zinc-950/50 rounded-xl p-4 mb-12 max-w-md hover:border-zinc-600 transition-all duration-300">
               <div className="flex items-center gap-3.5">
                 <div className="relative w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0">
-                  {/* نقطة حالة نبضية */}
                   <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
@@ -131,11 +131,11 @@ export default function ContactSection() {
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 group/step">
-                    <span className="flex-shrink-0 font-sans text-xs text-zinc-500 pt-0.5 ">
+                    <span className="flex-shrink-0 font-sans text-xs text-zinc-500 pt-0.5">
                       {item.num}
                     </span>
                     <div>
-                      <h4 className="text-sm font-sans text-white mb-1  ">
+                      <h4 className="text-sm font-sans text-white mb-1">
                         {item.title}
                       </h4>
                       <p className="text-xs text-zinc-400 leading-relaxed">
@@ -149,11 +149,9 @@ export default function ContactSection() {
           </div>
         </div>
 
+        {/* العمود الأيمن */}
         <div className="flex flex-col justify-start pt-2">
           <form className="space-y-10" onSubmit={handleSubmit}>
-            {/* الإيميل */}
-
-            {/* الاسم الأول والأخير */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex flex-col gap-2">
                 <label
@@ -166,9 +164,7 @@ export default function ContactSection() {
                   type="text"
                   value={firstName}
                   id="firstName"
-                  onChange={(e) => {
-                    setFirstName(e.target.value);
-                  }}
+                  onChange={(e) => setFirstName(e.target.value)}
                   placeholder="Type your first name"
                   className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
                 />
@@ -185,9 +181,7 @@ export default function ContactSection() {
                   type="text"
                   value={lastName}
                   id="lastName"
-                  onChange={(e) => {
-                    setLastName(e.target.value);
-                  }}
+                  onChange={(e) => setLastName(e.target.value)}
                   placeholder="Type your last name"
                   className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
                 />
@@ -205,14 +199,12 @@ export default function ContactSection() {
                 type="email"
                 value={email}
                 id="email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Type your email"
                 className="w-full bg-transparent border-b border-zinc-800 pb-3 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300"
               />
             </div>
-            {/* الرسالة */}
+
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="message"
@@ -225,9 +217,7 @@ export default function ContactSection() {
                 value={message}
                 placeholder="Tell us more about your project"
                 rows={1}
-                onChange={(e) => {
-                  setMessage(e.target.value);
-                }}
+                onChange={(e) => setMessage(e.target.value)}
                 className="w-full bg-transparent border-b border-zinc-800 pb-12 pt-2 text-white text-sm placeholder-zinc-600 focus:outline-none focus:border-white transition-all duration-300 resize-none"
               />
             </div>
@@ -262,16 +252,42 @@ export default function ContactSection() {
               </div>
             </div>
 
+            {/* قسم الإرسال وحاوية الـ Privacy Policy Hover */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 border-t border-zinc-900">
               <p className="text-zinc-500 text-xs">
                 By clicking &quot;Send Message&quot; you accept our{" "}
-                <Link
-                  href="#"
-                  className="text-zinc-300 underline underline-offset-4 hover:text-white"
-                >
-                  Privacy Policy
-                </Link>
+                <span className="relative inline-block group/popover">
+                  <Link
+                    href="#contact"
+                    className="text-zinc-300 underline underline-offset-4 hover:text-white cursor-pointer transition-colors"
+                  >
+                    Privacy Policy
+                  </Link>
+
+                  {/* الـ Hover Card العائم */}
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-80 p-4 bg-zinc-900/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-2xl opacity-0 invisible group-hover/popover:opacity-100 group-hover/popover:visible transition-all duration-200 pointer-events-none z-50">
+                    <div className="flex items-center gap-2 mb-2 pb-2 border-b border-zinc-800">
+                      <ShieldCheckIcon className="w-4 h-4 text-emerald-400" />
+                      <h5 className="text-xs font-semibold text-white">
+                        Privacy Summary
+                      </h5>
+                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed mb-2">
+                      We collect your name, email, and message details solely to
+                      respond to your inquiry and plan your project.
+                    </p>
+                    <ul className="text-[10px] text-zinc-500 space-y-1 list-disc list-inside">
+                      <li>Strictly no third-party marketing sharing</li>
+                      <li>Encrypted & secure handling</li>
+                      <li>Request data removal anytime</li>
+                    </ul>
+
+                    {/* سهم التوجيه السفلي */}
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-zinc-900/95"></div>
+                  </div>
+                </span>
               </p>
+
               <button
                 type="submit"
                 className="bg-white hover:bg-zinc-200 text-black px-8 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-105 active:scale-95 w-full sm:w-auto shadow-[0_0_20px_rgba(255,255,255,0.1)]"
