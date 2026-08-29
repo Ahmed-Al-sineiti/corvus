@@ -55,20 +55,6 @@ ${message}
 🌐 Service:
 ${ServiceType}
 `;
-    //Discord
-    const discordText = `
-📩 New Website Message
-
-👤 Name: ${firstName} ${lastName}
-📧 Email: ${email}
-
-💬 Message:
-${message}
-
-🌐 Service:
-${ServiceType}
-`;
-
     try {
       await sendTelegramMessage(telegramText);
       console.log("Telegram sent successfully");
@@ -162,7 +148,13 @@ ${message}
 
     // Discord sender bot
     try {
-      await discordSender(discordText);
+      await discordSender({
+        firstName,
+        lastName,
+        email,
+        ServiceType,
+        message,
+      });
     } catch (error) {
       console.error(Error);
     }
