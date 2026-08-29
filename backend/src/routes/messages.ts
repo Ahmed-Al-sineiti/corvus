@@ -146,7 +146,9 @@ ${message}
       console.error("Email failed:", error);
     }
 
-    // Return response only once
+    // Discord sender bot
+    try {
+    } catch (error) {}
     return res.status(201).json(newMessage);
   } catch (error) {
     console.error(error);
