@@ -1,22 +1,22 @@
 import { Client, GatewayIntentBits, Guild, TextChannel } from "discord.js";
 
-const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
-});
+export default async function discordSender(discordText: string) {
+  const client = new Client({
+    intents: [GatewayIntentBits.Guilds],
+  });
 
-client.on("guildCreate", async (guild: Guild): Promise<void> => {
-  const me = guild.members.me;
-  if (!me) return;
+  client.on("guildCreate", async (guild: Guild): Promise<void> => {
+    const me = guild.members.me;
+    if (!me) return;
 
-  const channel = guild.channels.cache.find(
-    (ch) => ch.isTextBased() && ch.permissionsFor(me).has("SendMessages"),
-  );
-
-  if (channel) {
-    await (channel as TextChannel).send(
-      `👋 أهلاً بكم في سيرفر **${guild.name}**! شكراً لإضافتي. أنا جاهز للعمل!`,
+    const channel = guild.channels.cache.find(
+      (ch) => ch.isTextBased() && ch.permissionsFor(me).has("SendMessages"),
     );
-  }
-});
 
-client.login(process.env.DISCORD_TOKEN);
+    if (channel) {
+      await (channel as TextChannel).send(discordText);
+    }
+  });
+
+  client.login(process.env.DISCORD_TOKEN);
+}

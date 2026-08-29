@@ -3,6 +3,7 @@ import prisma from "../lib/prisma.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { sendTelegramMessage } from "../services/telegram.js";
 import { Resend } from "resend";
+import discordSender from "../services/discord.js";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -43,6 +44,19 @@ router.post("/", async (req, res) => {
 
     // Telegram
     const telegramText = `
+📩 New Website Message
+
+👤 Name: ${firstName} ${lastName}
+📧 Email: ${email}
+
+💬 Message:
+${message}
+
+🌐 Service:
+${ServiceType}
+`;
+    //Discord
+    const discordText = `
 📩 New Website Message
 
 👤 Name: ${firstName} ${lastName}
@@ -148,7 +162,10 @@ ${message}
 
     // Discord sender bot
     try {
-    } catch (error) {}
+      await discordSender(discordText);
+    } catch (error) {
+      console.error(Error);
+    }
     return res.status(201).json(newMessage);
   } catch (error) {
     console.error(error);
