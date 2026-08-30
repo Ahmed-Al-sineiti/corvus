@@ -94,17 +94,17 @@ export default function Hero() {
           {/* Heading + paragraph */}
           <div className="mt-[-50px]">
             <FadeIn delay={0.1}>
-              <h1 className="font-heading mb-5 whitespace-nowrap text-[clamp(2rem,8vw,4.5rem)] font-sans leading-[1.1] tracking-tight text-white">
-                Building Today’s
-              </h1>
-              <h1 className="whitespace-nowrap font-heading text-[clamp(2rem,8vw,4.5rem)] font-sans leading-[1.1] tracking-tight text-white">
-                <AnimatedHeader />
+              <h1 className="font-heading mb-5 whitespace-nowrap text-[clamp(2rem,4vw,4.5rem)] font-sans leading-[1.1] tracking-tight text-white">
+                Building the Right
+                <br /> Digital Solutions for
+                <br />
+                Business.
               </h1>
             </FadeIn>
             <FadeIn delay={0.2}>
-              <p className="mt-6 font-sans text-[clamp(1rem,0.94vw,1.125rem)] leading-[1.625] text-foreground-secondary sm:mt-8 lg:mt-10">
-                Utility crafts award-winning custom digital products driven by
-                strategy, design and technology
+              <p className="mt-6 font-sans text-[clamp(1rem,2vw,1.125rem)] leading-[1.625] text-foreground-secondary sm:mt-8 lg:mt-10">
+                Crafting exceptional web applications and efficient systems
+                <br /> that elevate your business.{" "}
               </p>
             </FadeIn>
           </div>
@@ -117,7 +117,7 @@ export default function Hero() {
                   href="#contact"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-4 text-[15px] font-medium text-black transition-all duration-300 hover:scale-105 active:scale-95"
                 >
-                  Work with us
+                  Work with us now
                 </Link>
               </Magnetic>
             </div>
