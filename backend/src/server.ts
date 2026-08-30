@@ -3,9 +3,10 @@ import cors from "cors";
 import messageRouter from "../src/routes/messages.js";
 import register from "../src/routes/register.js";
 import login from "../src/routes/login.js";
-import { loginSchema , registerSchema} from "./schemas/auth.schema.js";
+import { loginSchema, registerSchema } from "./schemas/auth.schema.js";
+import "../src/services/discord.js";
 
-import validate from "../src/middleware/validate.js"
+import validate from "../src/middleware/validate.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 5000;
@@ -17,7 +18,11 @@ app.use(
   cors({
     origin(origin, callback) {
       // Requests without an Origin header include local tools such as curl.
-      if (!origin || !allowedOrigins?.length || allowedOrigins.includes(origin)) {
+      if (
+        !origin ||
+        !allowedOrigins?.length ||
+        allowedOrigins.includes(origin)
+      ) {
         return callback(null, true);
       }
 
@@ -32,8 +37,8 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.use("/api/messages", messageRouter);
-app.use("/api/register",  validate(registerSchema) ,register);
-app.use("/api/login",validate(loginSchema) , login);
+app.use("/api/register", validate(registerSchema), register);
+app.use("/api/login", validate(loginSchema), login);
 
 // Vercel invokes the exported app as a serverless function.
 export default app;

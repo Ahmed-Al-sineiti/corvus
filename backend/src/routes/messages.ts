@@ -3,6 +3,7 @@ import prisma from "../lib/prisma.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { sendTelegramMessage } from "../services/telegram.js";
 import { Resend } from "resend";
+import discordSender from "../services/discord.js";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -54,7 +55,6 @@ ${message}
 🌐 Service:
 ${ServiceType}
 `;
-
     try {
       await sendTelegramMessage(telegramText);
       console.log("Telegram sent successfully");
@@ -146,7 +146,18 @@ ${message}
       console.error("Email failed:", error);
     }
 
-    // Return response only once
+    // Discord sender bot
+    try {
+      await discordSender({
+        firstName,
+        lastName,
+        email,
+        ServiceType,
+        message,
+      });
+    } catch (error) {
+      console.error(Error);
+    }
     return res.status(201).json(newMessage);
   } catch (error) {
     console.error(error);
