@@ -16,24 +16,24 @@ const VT323_STACK = "var(--font-vt323), monospace";
 const SERVICES_TEXT_COLOR = "#7A7E84"; // نفس لون النص في قوالب السرفس
 
 // الدول اللي بنبرزها على الخريطة (بالـ ISO numeric id) + عدد المشاريع اللي بتتعرض عند الهوفر
-const COUNTRY_INFO: Record<number, { name: string; projects: number }> = {
-  818: { name: "Egypt", projects: 7 },
-  682: { name: "Saudi Arabia", projects: 8 },
-  784: { name: "UAE", projects: 6 },
-  634: { name: "Qatar", projects: 4 },
-  414: { name: "Kuwait", projects: 3 },
-  512: { name: "Oman", projects: 3 },
-  840: { name: "United States", projects: 5 },
-  826: { name: "United Kingdom", projects: 4 },
-  250: { name: "France", projects: 3 },
-  276: { name: "Germany", projects: 4 },
-  528: { name: "Netherlands", projects: 2 },
-  724: { name: "Spain", projects: 3 },
-  380: { name: "Italy", projects: 3 },
-  360: { name: "Indonesia", projects: 3 },
-  458: { name: "Malaysia", projects: 2 },
-  643: { name: "Russia", projects: 4 },
-  76: { name: "Brazil", projects: 2 },
+const COUNTRY_INFO: Record<number, { name: string; status: string }> = {
+  818: { name: "Egypt", status: "Markets" },
+  682: { name: "Saudi Arabia", status: "Markets" },
+  784: { name: "UAE", status: "Markets" },
+  634: { name: "Qatar", status: "Markets" },
+  414: { name: "Kuwait", status: "Markets" },
+  512: { name: "Oman", status: "Markets" },
+  840: { name: "United States", status: "Markets" },
+  826: { name: "United Kingdom", status: "Markets" },
+  250: { name: "France", status: "Markets" },
+  276: { name: "Germany", status: "Markets" },
+  528: { name: "Netherlands", status: "Markets" },
+  724: { name: "Spain", status: "Markets" },
+  380: { name: "Italy", status: "Markets" },
+  360: { name: "Indonesia", status: "Markets" },
+  458: { name: "Malaysia", status: "Markets" },
+  643: { name: "Russia", status: "Markets" },
+  76: { name: "Brazil", status: "Markets" },
 };
 
 const HIGHLIGHTED_COUNTRIES = new Set(Object.keys(COUNTRY_INFO).map(Number));
@@ -63,7 +63,10 @@ type Callout = {
   frameY: number;
 };
 
-function trimToBox(f: Feature<MultiPolygon>, box: typeof EURO_BOX): Feature<MultiPolygon> {
+function trimToBox(
+  f: Feature<MultiPolygon>,
+  box: typeof EURO_BOX,
+): Feature<MultiPolygon> {
   const [[w, s], [e, n]] = box;
   const polys = f.geometry.coordinates.filter((p) => {
     const c = geoCentroid({ type: "Polygon", coordinates: p });
@@ -79,7 +82,9 @@ function trimToBox(f: Feature<MultiPolygon>, box: typeof EURO_BOX): Feature<Mult
 }
 
 const WorldMap: React.FC<{ className?: string }> = ({ className }) => {
-  const [countries, setCountries] = useState<Feature<MultiPolygon>[] | null>(null);
+  const [countries, setCountries] = useState<Feature<MultiPolygon>[] | null>(
+    null,
+  );
   const [hoveredId, setHoveredId] = useState<number | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -92,12 +97,14 @@ const WorldMap: React.FC<{ className?: string }> = ({ className }) => {
         if (cancelled) return;
         const collection = feature(
           topo,
-          topo.objects.countries
+          topo.objects.countries,
         ) as unknown as FeatureCollection<MultiPolygon>;
 
         const trimmed = collection.features
           .filter((f) => Number(f.id) !== ANTARCTICA_ID)
-          .map((f) => (EURO_TERRITORIES.has(Number(f.id)) ? trimToBox(f, EURO_BOX) : f));
+          .map((f) =>
+            EURO_TERRITORIES.has(Number(f.id)) ? trimToBox(f, EURO_BOX) : f,
+          );
 
         setCountries(trimmed);
       })
@@ -117,7 +124,7 @@ const WorldMap: React.FC<{ className?: string }> = ({ className }) => {
       [24, 20],
       [W - 24, H - 20],
     ],
-    { type: "FeatureCollection", features: countries }
+    { type: "FeatureCollection", features: countries },
   );
   projection.clipExtent([
     [0, 0],
@@ -126,7 +133,10 @@ const WorldMap: React.FC<{ className?: string }> = ({ className }) => {
   const path = geoPath(projection);
 
   const hoveredInfo = hoveredId != null ? COUNTRY_INFO[hoveredId] : null;
-  const hoveredFeature = hoveredId != null ? countries.find((f) => Number(f.id) === hoveredId) : null;
+  const hoveredFeature =
+    hoveredId != null
+      ? countries.find((f) => Number(f.id) === hoveredId)
+      : null;
 
   let callout: Callout | null = null;
   if (hoveredFeature && hoveredInfo) {
@@ -168,7 +178,11 @@ const WorldMap: React.FC<{ className?: string }> = ({ className }) => {
             stroke={STROKE}
             strokeWidth={1.3}
             strokeLinejoin="round"
-            style={info ? { cursor: "pointer", transition: "fill 150ms ease" } : undefined}
+            style={
+              info
+                ? { cursor: "pointer", transition: "fill 150ms ease" }
+                : undefined
+            }
             onMouseEnter={info ? () => setHoveredId(id) : undefined}
             onMouseLeave={info ? () => setHoveredId(null) : undefined}
           />
@@ -186,7 +200,14 @@ const WorldMap: React.FC<{ className?: string }> = ({ className }) => {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <circle cx={callout.cx} cy={callout.cy} r={6} fill={LINE_COLOR} stroke="#000000" strokeWidth={2} />
+          <circle
+            cx={callout.cx}
+            cy={callout.cy}
+            r={6}
+            fill={LINE_COLOR}
+            stroke="#000000"
+            strokeWidth={2}
+          />
 
           <rect
             x={callout.frameX}
@@ -199,9 +220,24 @@ const WorldMap: React.FC<{ className?: string }> = ({ className }) => {
             strokeWidth={1.5}
           />
           {/* window-chrome header عشان تفضل نفس عيلة الأيقونات في الموقع */}
-          <circle cx={callout.frameX + 28} cy={callout.frameY + 26} r={5} fill="#3b3b3b" />
-          <circle cx={callout.frameX + 48} cy={callout.frameY + 26} r={5} fill="#3b3b3b" />
-          <circle cx={callout.frameX + 68} cy={callout.frameY + 26} r={5} fill="#3b3b3b" />
+          <circle
+            cx={callout.frameX + 28}
+            cy={callout.frameY + 26}
+            r={5}
+            fill="#3b3b3b"
+          />
+          <circle
+            cx={callout.frameX + 48}
+            cy={callout.frameY + 26}
+            r={5}
+            fill="#3b3b3b"
+          />
+          <circle
+            cx={callout.frameX + 68}
+            cy={callout.frameY + 26}
+            r={5}
+            fill="#3b3b3b"
+          />
           <line
             x1={callout.frameX}
             y1={callout.frameY + 46}
@@ -227,7 +263,7 @@ const WorldMap: React.FC<{ className?: string }> = ({ className }) => {
             fontSize={38}
             fill={SERVICES_TEXT_COLOR}
           >
-            {hoveredInfo.projects} PROJECT{hoveredInfo.projects === 1 ? "" : "S"}
+            {hoveredInfo.status}
           </text>
         </g>
       )}
