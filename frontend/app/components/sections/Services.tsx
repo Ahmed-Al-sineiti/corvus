@@ -73,7 +73,7 @@ const ServicesSection: FC = () => {
 
         <StaggerGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((service, i) => (
-            <ServiceCard key={i} service={service} />
+            <ServiceCard key={i} service={service} index={i} />
           ))}
         </StaggerGroup>
       </div>
@@ -82,51 +82,56 @@ const ServicesSection: FC = () => {
 };
 
 // مكون فرعي لكل كارت عشان يتحكم في إضاءة الماوس بشكل منفرد ونظيف
-const ServiceCard: FC<{ service: ServiceItem }> = ({ service }) => {
-  return (
-    <StaggerItem className="h-full border-r border-[#222429] last:border-r-0">
-  <div
-    className="group relative flex h-full flex-col p-8 rounded-2xl overflow-hidden transition-all duration-300"
-  >
-    {/* محتوى الكارت */}
-    <div className="relative mb-8 flex w-full items-center justify-center h-[220px] pt-8 sm:h-[270px] sm:pt-10">
-      <span className="absolute left-0 top-0 font-mono text-xs uppercase text-[#8A8F98]">
-        {service.fig}
-      </span>
-      {service.icon === "/services/software-development.svg" ? (
-        <CodeWindowIcon
-          className={`h-[85%] w-[85%] transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
-        />
-      ) : service.icon === "/services/wireframe.svg" ? (
-        <WireframeWindowIcon
-          className={`h-[85%] w-[85%] transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
-        />
-      ) : service.icon === "/services/error.svg" ? (
-        <MaintenanceErrorIcon
-          className={`h-[85%] w-[85%] transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
-        />
-      ) : service.icon === "/services/seo.svg" ? (
-        <SearchResultIcon
-          className={`h-[85%] w-[85%] transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
-        />
-      ) : (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={service.icon}
-          alt=""
-          className={`h-[85%] w-[85%] object-contain transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
-        />
-      )}
-    </div>
+const ServiceCard: FC<{ service: ServiceItem; index: number }> = ({ service, index }) => {
+  const borderClasses = 
+    index === 0 || index === 2 ? "border-r-0 sm:border-r" :
+    index === 1 ? "border-r-0 lg:border-r" :
+    "border-r-0";
 
-    <h3 className="mb-3 text-[16px] font-medium tracking-[-0.011em] text-[#8A8F98]">
-      {service.title}
-    </h3>
-    <p className="max-w-[368px] text-[14px] leading-[1.6] tracking-[-0.011em] text-[#62666D]">
-      {service.description}
-    </p>
-  </div>
-</StaggerItem>
+  return (
+    <StaggerItem className={`h-full border-[#222429] ${borderClasses}`}>
+      <div
+        className="group relative flex h-full flex-col p-8 rounded-2xl overflow-hidden transition-all duration-300"
+      >
+        {/* محتوى الكارت */}
+        <div className="relative mb-8 flex w-full items-center justify-center h-[220px] pt-8 sm:h-[270px] sm:pt-10">
+          <span className="absolute left-0 top-0 font-mono text-xs uppercase text-[#8A8F98]">
+            {service.fig}
+          </span>
+          {service.icon === "/services/software-development.svg" ? (
+            <CodeWindowIcon
+              className={`h-[85%] w-[85%] transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
+            />
+          ) : service.icon === "/services/wireframe.svg" ? (
+            <WireframeWindowIcon
+              className={`h-[85%] w-[85%] transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
+            />
+          ) : service.icon === "/services/error.svg" ? (
+            <MaintenanceErrorIcon
+              className={`h-[85%] w-[85%] transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
+            />
+          ) : service.icon === "/services/seo.svg" ? (
+            <SearchResultIcon
+              className={`h-[85%] w-[85%] transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={service.icon}
+              alt=""
+              className={`h-[85%] w-[85%] object-contain transition-transform duration-500 ease-out ${service.imgClassName || ""}`}
+            />
+          )}
+        </div>
+
+        <h3 className="mb-3 text-[16px] font-medium tracking-[-0.011em] text-[#8A8F98]">
+          {service.title}
+        </h3>
+        <p className="max-w-[368px] text-[14px] leading-[1.6] tracking-[-0.011em] text-[#62666D]">
+          {service.description}
+        </p>
+      </div>
+    </StaggerItem>
   );
 };
 
@@ -431,65 +436,65 @@ const SearchResultIcon: FC<{ className?: string }> = ({ className }) => {
   const tld = useTypewriterLoop(DOMAIN_TLDS, isVisible);
 
   return (
-  <svg ref={svgRef} viewBox="0 0 334 230" className={className} xmlns="http://www.w3.org/2000/svg">
-    <WindowChrome />
+    <svg ref={svgRef} viewBox="0 0 334 230" className={className} xmlns="http://www.w3.org/2000/svg">
+      <WindowChrome />
 
-    {/* Search bar */}
-    <rect
-      x="22"
-      y="48"
-      width="290"
-      height="28"
-      rx="14"
-      fill="none"
-      stroke="#62666D"
-      strokeWidth="1.5"
-      strokeOpacity="0.55"
-    />
-    <circle cx="37" cy="62" r="6" fill="none" stroke="#62666D" strokeWidth="1.5" strokeOpacity="0.55" />
-    <line x1="41.5" y1="66.5" x2="46" y2="71" stroke="#62666D" strokeWidth="1.5" strokeOpacity="0.55" strokeLinecap="round" />
-    <text
-      x="54"
-      y="67"
-      fontSize="15"
-      fill="#7A7E84"
-      style={{ fontFamily: "var(--font-vt323), monospace" }}
-    >
-      Your Website Name
-    </text>
+      {/* Search bar */}
+      <rect
+        x="22"
+        y="48"
+        width="290"
+        height="28"
+        rx="14"
+        fill="none"
+        stroke="#62666D"
+        strokeWidth="1.5"
+        strokeOpacity="0.55"
+      />
+      <circle cx="37" cy="62" r="6" fill="none" stroke="#62666D" strokeWidth="1.5" strokeOpacity="0.55" />
+      <line x1="41.5" y1="66.5" x2="46" y2="71" stroke="#62666D" strokeWidth="1.5" strokeOpacity="0.55" strokeLinecap="round" />
+      <text
+        x="54"
+        y="67"
+        fontSize="15"
+        fill="#7A7E84"
+        style={{ fontFamily: "var(--font-vt323), monospace" }}
+      >
+        Your Website Name
+      </text>
 
-    {/* Search result - النتيجة الأولى، أعلى تباين */}
-    <text
-      x="22"
-      y="118"
-      fontSize="22"
-      fill="#7A7E84"
-      style={{ fontFamily: "var(--font-vt323), monospace" }}
-    >
-      <tspan>yourwebsite</tspan>
-      <tspan>{tld}</tspan>
-    </text>
+      {/* Search result - النتيجة الأولى، أعلى تباين */}
+      <text
+        x="22"
+        y="118"
+        fontSize="22"
+        fill="#7A7E84"
+        style={{ fontFamily: "var(--font-vt323), monospace" }}
+      >
+        <tspan>yourwebsite</tspan>
+        <tspan>{tld}</tspan>
+      </text>
 
-    {/* نتايج تانية - لون أبهت عشان كل التباين يفضل على النتيجة الأولى */}
-    <text
-      x="22"
-      y="150"
-      fontSize="16"
-      fill="#4A4D53"
-      style={{ fontFamily: "var(--font-vt323), monospace" }}
-    >
-      othersite.com
-    </text>
-    <text
-      x="22"
-      y="174"
-      fontSize="16"
-      fill="#4A4D53"
-      style={{ fontFamily: "var(--font-vt323), monospace" }}
-    >
-      competitor.net
-    </text>
-  </svg>
+      {/* نتايج تانية - لون أبهت عشان كل التباين يفضل على النتيجة الأولى */}
+      <text
+        x="22"
+        y="150"
+        fontSize="16"
+        fill="#4A4D53"
+        style={{ fontFamily: "var(--font-vt323), monospace" }}
+      >
+        othersite.com
+      </text>
+      <text
+        x="22"
+        y="174"
+        fontSize="16"
+        fill="#4A4D53"
+        style={{ fontFamily: "var(--font-vt323), monospace" }}
+      >
+        competitor.net
+      </text>
+    </svg>
   );
 };
 

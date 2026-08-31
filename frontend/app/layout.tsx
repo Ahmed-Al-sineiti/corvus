@@ -46,7 +46,7 @@ export default function RootLayout({
         className="min-h-screen w-full overflow-x-hidden flex flex-col bg-background text-foreground"
       >
         <Nav />
-        {children}
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

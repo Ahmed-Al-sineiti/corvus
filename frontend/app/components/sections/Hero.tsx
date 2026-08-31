@@ -30,7 +30,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex overflow-hidden bg-black lg:-mt-[104px] lg:h-[950px]"
+      className="relative flex overflow-hidden bg-black lg:h-[950px]"
     >
       {/* أنيميشن نبض خافت للنقاط والشبكة فقط (على البيكسلات نفسها) */}
       <style jsx>{`
@@ -89,10 +89,10 @@ export default function Hero() {
         </div>
       </div>
 
-      <Container className="relative z-20 flex w-full flex-col justify-center py-16 sm:py-24 lg:py-0 pointer-events-none">
+      <Container className="relative z-20 flex w-full flex-col justify-center pt-32 pb-16 sm:pt-40 sm:pb-24 lg:py-0 pointer-events-none">
         <div className="w-full max-w-[764px] pointer-events-auto">
           {/* Heading + paragraph */}
-          <div className="mt-[-50px]">
+          <div className="lg:mt-[-50px]">
             <FadeIn delay={0.1}>
               <h1 className="font-heading mb-5 whitespace-nowrap text-[clamp(2rem,4vw,4.5rem)] font-sans leading-[1.1] tracking-tight text-white">
                 Building the Right
