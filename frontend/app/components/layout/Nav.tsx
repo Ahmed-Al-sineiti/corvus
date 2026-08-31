@@ -15,6 +15,7 @@ const navLinks = [
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     if (menuOpen) {
@@ -27,20 +28,42 @@ export default function Nav() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header
-      id="nav"
-      className={`relative z-50 font-sans transition-colors duration-300 ${menuOpen ? "text-foreground" : "text-foreground-secondary"}`}
-    >
+    <>
       {/* Full-screen backdrop blur overlay */}
       <div 
-        className={`fixed inset-0 bg-black/60 transition-all duration-500 lg:hidden ${menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 z-40 bg-black/80 transition-all duration-500 lg:hidden ${menuOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         style={{ backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)' }}
         onClick={() => setMenuOpen(false)}
       />
-      <Container className="relative z-10">
-        <nav>
-          <div className="flex items-center justify-between gap-6 py-4 md:py-5">
+      
+      <header
+        id="nav"
+        className={`fixed top-0 left-0 w-full z-50 font-sans transition-all duration-300 ${
+          isScrolled && !menuOpen
+            ? "bg-black/40 backdrop-blur-xl border-b border-white/5 shadow-2xl"
+            : "bg-transparent border-b border-transparent"
+        } ${menuOpen ? "text-foreground" : "text-foreground-secondary"}`}
+      >
+        <Container className="relative z-10">
+          <nav>
+          <div
+            className={`flex items-center justify-between gap-6 transition-all duration-300 ${
+              isScrolled ? "py-3 md:py-4" : "py-4 md:py-5"
+            }`}
+          >
             {/* Logo */}
             <div className="shrink-0">
               <Link href="/">
@@ -145,6 +168,7 @@ export default function Nav() {
           </div>
         </nav>
       </Container>
-    </header>
+      </header>
+    </>
   );
 }

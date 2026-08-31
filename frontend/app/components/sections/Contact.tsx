@@ -82,7 +82,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="w-full bg-black min-h-screen py-20 px-6 md:px-12 lg:px-24 font-sans text-white"
+      className="w-full bg-black py-20 px-6 md:px-12 lg:px-24 font-sans text-white"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
         {/* العمود الأيسر: النصوص والخطوات كارد الحجز */}
