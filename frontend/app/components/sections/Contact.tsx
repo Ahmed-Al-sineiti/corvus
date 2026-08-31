@@ -198,7 +198,7 @@ export default function ContactSection() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="firstName"
-                  className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
+                  className="text-xs font-sans tracking-wider text-zinc-400 "
                 >
                   First Name
                 </label>
@@ -218,7 +218,7 @@ export default function ContactSection() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="lastName"
-                  className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
+                  className="text-xs font-sans tracking-wider text-zinc-400 "
                 >
                   Last Name
                 </label>
@@ -239,7 +239,7 @@ export default function ContactSection() {
             <div className="flex flex-col gap-2 relative group">
               <label
                 htmlFor="email"
-                className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
+                className="text-xs font-sans tracking-wider text-zinc-400 "
               >
                 Email
               </label>
@@ -261,7 +261,7 @@ export default function ContactSection() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="message"
-                className="text-xs font-sans tracking-wider text-zinc-400 uppercase"
+                className="text-xs font-sans tracking-wider text-zinc-400 "
               >
                 Message
               </label>
@@ -279,7 +279,7 @@ export default function ContactSection() {
             </div>
 
             <div className="space-y-4 pt-2">
-              <p className="text-xs font-mono tracking-wider text-zinc-400 uppercase">
+              <p className="text-xs font-sans tracking-wider text-zinc-400 ">
                 Services you&apos;re interested in
               </p>
 

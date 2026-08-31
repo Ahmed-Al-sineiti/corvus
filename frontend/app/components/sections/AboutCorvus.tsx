@@ -8,7 +8,10 @@ export default function AboutSection() {
   const [activePara, setActivePara] = useState<number | null>(null);
 
   return (
-    <section id="about" className="w-full bg-black py-24 px-6 md:px-12 lg:px-24 font-sans border-t border-zinc-900/50">
+    <section
+      id="about"
+      className="w-full bg-black py-24 px-6 md:px-12 lg:px-24 font-sans border-t border-zinc-900/50"
+    >
       <div className="max-w-[1600px] mx-auto">
         {/* الجزء العلوي: العنوان والوصف في المنتصف */}
         <div className="text-center max-w-3xl mx-auto mb-24 flex flex-col items-center">
@@ -24,7 +27,8 @@ export default function AboutSection() {
               delay={300}
               className="font-sans mt-5 text-sm leading-relaxed text-foreground-secondary sm:text-base xl:text-lg"
             >
-              A digital product studio based in Cairo, built on top-tier engineering and design talent.
+              A digital product studio, built on top-tier engineering and design
+              talent.
             </TextReveal>
           </div>
         </div>
@@ -39,10 +43,10 @@ export default function AboutSection() {
           {/* العمود الأيمن: النص التفاعلي */}
           <div className="flex flex-col justify-center h-full space-y-6 text-sm md:text-base leading-relaxed">
             {[
-              "We've spent years partnering with ambitious teams to build high-performance web applications and SaaS platforms that drive real impact. We navigate the hardest product moments where technical decisions define your future.",
-              "We don't just write code. We partner. There's a difference in how we think about software architecture, how we deliver, and how we align with your business goals.",
-              "The companies we work with aren't just looking for an agency. They're looking for a dedicated team that treats their product as its own. That's exactly how we operate.",
-              "Founded with a passion for clean code and exceptional user experiences, we hire from the strongest talent pools. We are builders who ship complex digital products designed to handle real-world scale with speed and reliability.",
+              "We engineer exceptional web applications and efficient backend systems tailored to your specific business logic. Our focus goes beyond just writing code; we build the right digital solutions designed to elevate your daily operations and drive sustainable growth.",
+              "Though our engineering core is centralized, our digital footprint and market targeting are inherently global. We design scalable products built to cross borders, empowering your business to reach wider audiences and adapt to diverse, international markets seamlessly.",
+              "We act as an extension of your team, bringing modern software architecture and robust technical decisions to the table. From seamless user interfaces to complex data structures, we build resilient platforms that perform reliably under real-world demands.",
+              "Our clients aren't looking for a basic vendor; they need builders who treat their product as their own. By combining clean code with strategic design, we deliver high-performance systems that don't just solve today's problems, but scale effortlessly with your future ambitions.",
             ].map((text, index) => (
               <div
                 key={index}

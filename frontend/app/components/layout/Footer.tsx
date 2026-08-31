@@ -10,7 +10,7 @@ interface FooterColumn {
 
 const columns: FooterColumn[] = [
   {
-    title: "SERVICES",
+    title: "Services",
     links: [
       { label: "UI/UX Design", href: "#" },
       { label: "Web Development", href: "#" },
@@ -19,7 +19,7 @@ const columns: FooterColumn[] = [
     ],
   },
   {
-    title: "LINKS",
+    title: "Links",
     links: [
       { label: "Main", href: "#nav" },
       { label: "Services", href: "#services" },
@@ -98,15 +98,14 @@ export default function Footer() {
               className="h-12 w-auto object-contain"
             />
             <p className="font-sans mt-5 max-w-xs text-sm leading-relaxed text-foreground-secondary sm:max-w-sm">
-              We design and build digital systems, applications, and experiences
-              that drive real impact.
+              Building the Right Digital Solutions for Business.
             </p>
           </div>
 
           {/* Link columns — 2 columns each (total 6 columns) */}
           {columns.map((column) => (
             <div key={column.title} className="lg:col-span-2">
-              <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground">
+              <p className="font-sans normal-case text-xs font-medium tracking-[0.2em] text-foreground">
                 {column.title}
               </p>
               <div className="mt-4 mb-5 border-t border-border" />
@@ -128,8 +127,8 @@ export default function Footer() {
 
           {/* Get in touch — 3 columns */}
           <div className="lg:col-span-3">
-            <p className="font-mono text-xs font-medium tracking-[0.2em] text-foreground">
-              GET IN TOUCH
+            <p className="font-sans text-xs font-medium tracking-[0.2em] text-foreground">
+              Get In Touch
             </p>
             <div className="mt-4 mb-5 border-t border-border " />
             <ul className="flex flex-col gap-3.5">
@@ -145,23 +144,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="lg:col-span-2">
-            <p className=" font-mono text-xs font-medium tracking-[0.2em] text-foreground">
-              FOLLOW US
-            </p>
-            <div className="mt-4 mb-5 flex flex-row gap-6 border-t border-border">
-              {socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="mt-2 flex h-9 w-9 items-center justify-center text-foreground-secondary transition-all duration-300 hover:scale-110 hover:text-foreground"
-                >
-                  {social.icon}
-                </a>
-              ))}
-            </div>
           </div>
         </div>
       </Container>
