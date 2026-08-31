@@ -8,7 +8,7 @@ const VIDEOS = [
   "https://res.cloudinary.com/oilun9qx/video/upload/v1787795664/takya.mp4",
   "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4",
   "https://res.cloudinary.com/spkrgysz/video/upload/v1787871925/Tabarak_Compressed.mp4",
-  "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4",
+  "https://player.mux.com/GEmzKnV02qrg7ADfxOi00KiwBZOXfFNN4dwTCqR7aQj02Q",
 ];
 
 export default function Projects() {
