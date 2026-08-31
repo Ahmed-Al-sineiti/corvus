@@ -5,9 +5,9 @@ import Container from "../layout/Container";
 import TextReveal from "../ui/TextReveal";
 
 const VIDEOS = [
-  "https://res.cloudinary.com/oilun9qx/video/upload/v1787795664/takya.mp4",
-  "https://res.cloudinary.com/oilun9qx/video/upload/v1787795693/kingsfield.mp4",
-  "https://res.cloudinary.com/spkrgysz/video/upload/v1787871925/Tabarak_Compressed.mp4",
+  "https://kbwctahdlaloeuidjqob.supabase.co/storage/v1/object/public/jwdjjjqwjd/takya.mp4",
+  "https://kbwctahdlaloeuidjqob.supabase.co/storage/v1/object/public/jwdjjjqwjd/kingsfield(1).mp4",
+  "https://kbwctahdlaloeuidjqob.supabase.co/storage/v1/object/public/jwdjjjqwjd/Tabarak_Compressed.mp4",
   "https://kbwctahdlaloeuidjqob.supabase.co/storage/v1/object/public/jwdjjjqwjd/compressed_output.mp4",
 ];
 
