@@ -9,6 +9,7 @@ const VIDEOS = [
   "https://kbwctahdlaloeuidjqob.supabase.co/storage/v1/object/public/jwdjjjqwjd/kingsfield(1).mp4",
   "https://kbwctahdlaloeuidjqob.supabase.co/storage/v1/object/public/jwdjjjqwjd/Tabarak_Compressed.mp4",
   "https://kbwctahdlaloeuidjqob.supabase.co/storage/v1/object/public/jwdjjjqwjd/compressed_output.mp4",
+  "https://kbwctahdlaloeuidjqob.supabase.co/storage/v1/object/public/jwdjjjqwjd/pharma.mp4",
 ];
 
 export default function Projects() {
