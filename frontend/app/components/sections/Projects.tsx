@@ -103,7 +103,7 @@ function LazyVideo({ src }: { src: string }) {
         transition-transform
         duration-500
         will-change-transform
-        group-hover:scale-105
+        
       "
     />
   );
