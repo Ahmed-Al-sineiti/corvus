@@ -200,7 +200,7 @@ export default function Projects() {
                 sm:text-5xl
               "
             >
-              {"Selected\nWorks"}
+              {"Selected Works"}
             </TextReveal>
 
             <TextReveal
