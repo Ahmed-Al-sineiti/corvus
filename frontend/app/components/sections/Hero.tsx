@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex overflow-hidden bg-black lg:h-[950px]"
+      className="relative flex overflow-hidden bg-black lg:min-h-svh"
     >
       {/* حاوية الرسمة (الغراب) — تفاعلية مع الماوس، لذلك كلاينت منفصل */}
       <HeroCrow />
@@ -27,7 +27,7 @@ export default function Hero() {
               style={{ animationDelay: "0.08s" }}
             >
               Crafting exceptional web applications and efficient systems
-              <br /> that elevate your business.{" "}
+              <br className="hidden sm:inline" /> that elevate your business.{" "}
             </p>
           </div>
 

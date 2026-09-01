@@ -1,11 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import TextReveal from "../ui/TextReveal";
-import WorldMap from "./WorldMap";
+
+// The map pulls in d3-geo + topojson-client and fetches a ~105KB atlas. It sits
+// below the fold, so load its chunk only once the user scrolls near it.
+const WorldMap = dynamic(() => import("./WorldMap"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function AboutSection() {
   const [activePara, setActivePara] = useState<number | null>(null);
+  const [showMap, setShowMap] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = mapRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
@@ -36,8 +63,9 @@ export default function AboutSection() {
         {/* الجزء السفلي: الصورة والنص التفاعلي */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-24 items-center">
           {/* العمود الأيسر: خريطة الانتشار العالمي بدل الـ illustration القديمة */}
-          <div className="w-full mx-auto lg:mx-0">
-            <WorldMap className="block h-auto w-full" />
+          {/* aspect-video يحجز مكان الخريطة (نفس نسبة 1920×1080) فمفيش layout shift */}
+          <div ref={mapRef} className="w-full mx-auto lg:mx-0 aspect-video">
+            {showMap && <WorldMap className="block h-auto w-full" />}
           </div>
 
           {/* العمود الأيمن: النص التفاعلي */}

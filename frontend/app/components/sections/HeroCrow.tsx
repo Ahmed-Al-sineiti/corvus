@@ -3,8 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-// Rendered width of the illustration at each breakpoint (see wrapper classes below).
-const CROW_SIZES = "(min-width: 1024px) 81vw, (min-width: 640px) 100vw, 130vw";
+// The illustration box spans the full viewport width on phones/tablets and 82%
+// of it from the large breakpoint up — so `sizes` stays a plain, honest value.
+const CROW_SIZES = "(min-width: 1024px) 82vw, 100vw";
+
+// Same object rules on both layers so the hover glow lines up with the base.
+// The bright bird head sits in the upper-left third of the artwork; everything
+// else is expendable ambient mesh.
+// < lg: fill the hero, cropping the sparse mesh but keeping the head in frame.
+// >= lg: show the whole crow, anchored to the right so the beak faces the copy.
+const CROW_FIT =
+  "object-cover [object-position:38%_30%] lg:object-contain lg:[object-position:100%_50%]";
 
 export default function HeroCrow() {
   const imgContainerRef = useRef<HTMLDivElement>(null);
@@ -30,19 +39,18 @@ export default function HeroCrow() {
       ref={imgContainerRef}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="pointer-events-auto absolute -right-[15vw] top-[120px] hidden min-[480px]:block w-[130vw] sm:-right-[5vw] sm:top-[80px] sm:w-[100vw] lg:-right-[3vw] lg:top-[51px] lg:w-[81.07vw] select-none lg:block z-0 opacity-40 lg:opacity-100 transition-opacity duration-300"
+      className="hidden sm:block pointer-events-none absolute inset-y-0 right-0 z-0 w-full select-none opacity-40 transition-opacity duration-300 lg:pointer-events-auto lg:w-[82%] lg:opacity-100"
     >
-      {/* 1. الطبقة الأساسية: الشبكة العادية بتعمل نبض هادئ على النقاط فقط */}
+      {/* 1. الطبقة الأساسية: الشبكة العادية */}
       <Image
         src="/hero.png"
         alt=""
-        width={1551}
-        height={867}
+        fill
         sizes={CROW_SIZES}
-        className="h-auto w-full opacity-80 animate-mesh-pulse"
+        className={`${CROW_FIT} opacity-80`}
       />
 
-      {/* 2. طبقة التوهج التفاعلي: تضيء النقاط والخطوط القريبة من الماوس بشدة بدون إضاءة الخلفية السوداء */}
+      {/* 2. طبقة التوهج التفاعلي: تضيء النقاط والخطوط القريبة من الماوس عند الـ hover */}
       <div
         className="absolute inset-0 transition-opacity duration-300 pointer-events-none"
         style={{
@@ -51,14 +59,13 @@ export default function HeroCrow() {
           maskImage: `radial-gradient(250px circle at ${mousePos.x}px ${mousePos.y}px, black 0%, transparent 100%)`,
         }}
       >
-        {/* Same src as the base layer -> served from cache, no extra network request. */}
+        {/* Same src as the base layer -> served from cache, no extra request. */}
         <Image
           src="/hero.png"
           alt=""
-          width={1551}
-          height={867}
+          fill
           sizes={CROW_SIZES}
-          className="h-auto w-full filter brightness-120 contrast-150 "
+          className={`${CROW_FIT} filter brightness-120 contrast-150`}
         />
       </div>
     </div>

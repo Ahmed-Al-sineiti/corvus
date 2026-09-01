@@ -103,7 +103,7 @@ function LazyVideo({ src }: { src: string }) {
         transition-transform
         duration-500
         will-change-transform
-        
+        lg:group-hover:scale-105
       "
     />
   );
@@ -157,17 +157,19 @@ export default function Projects() {
     >
       <LazyVideo src={src} />
 
+      {/* لا يوجد hover على اللمس -> على < lg العرض بلون كامل بدون تعتيم/رمادي. */}
+      {/* على lg فقط: معتم ورمادي، ويصفو عند الـ hover. */}
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-          bg-black/50
-          backdrop-grayscale
           transition-all
           duration-500
-          group-hover:bg-transparent
-          group-hover:backdrop-grayscale-0
+          lg:bg-black/50
+          lg:backdrop-grayscale
+          lg:group-hover:bg-transparent
+          lg:group-hover:backdrop-grayscale-0
         "
       />
     </div>
