@@ -39,9 +39,10 @@ export default function Projects() {
         loop
         muted
         playsInline
-        className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+        preload="none"
+        className="h-full w-full object-cover transition-all duration-500 lg:group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-black/50 backdrop-grayscale transition-all duration-500 group-hover:bg-transparent group-hover:backdrop-grayscale-0 pointer-events-none" />
+      <div className="absolute inset-0 transition-all duration-500 pointer-events-none bg-transparent lg:bg-black/50 lg:backdrop-grayscale lg:group-hover:bg-transparent lg:group-hover:backdrop-grayscale-0" />
     </div>
   );
 
