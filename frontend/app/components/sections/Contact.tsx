@@ -127,7 +127,7 @@ export default function ContactSection() {
               </div>
 
               <Link
-                href="https://wa.me/+201006560891"
+                href="https://wa.me/+201042905356"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs font-medium text-black bg-white hover:bg-zinc-200 px-4 py-2 rounded-full transition-all duration-300 hover:scale-105 shrink-0 ml-3"

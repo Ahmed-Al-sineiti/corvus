@@ -43,10 +43,10 @@ export default function AboutSection() {
           {/* العمود الأيمن: النص التفاعلي */}
           <div className="flex flex-col justify-center h-full space-y-6 text-sm md:text-base leading-relaxed">
             {[
-              "We engineer exceptional web applications and efficient backend systems tailored to your specific business logic. Our focus goes beyond just writing code; we build the right digital solutions designed to elevate your daily operations and drive sustainable growth.",
-              "Though our engineering core is centralized, our digital footprint and market targeting are inherently global. We design scalable products built to cross borders, empowering your business to reach wider audiences and adapt to diverse, international markets seamlessly.",
-              "We act as an extension of your team, bringing modern software architecture and robust technical decisions to the table. From seamless user interfaces to complex data structures, we build resilient platforms that perform reliably under real-world demands.",
-              "Our clients aren't looking for a basic vendor; they need builders who treat their product as their own. By combining clean code with strategic design, we deliver high-performance systems that don't just solve today's problems, but scale effortlessly with your future ambitions.",
+              "We build cutting-edge web applications and efficient backend systems tailored to your business needs to enhance operational efficiency and drive sustainable growth.",
+              "We engineer globally scalable products that cross borders, enabling your business to reach wider audiences and seamlessly adapt to international markets.",
+              "We act as an extension of your team, delivering modern architecture, resilient platforms, and robust technical solutions—from interfaces to complex data structures—built to perform reliably under real-world demands.",
+              "We act as vested partners, combining clean code with strategic design to deliver high-performance systems that solve today's problems and scale effortlessly with your future ambitions.",
             ].map((text, index) => (
               <div
                 key={index}

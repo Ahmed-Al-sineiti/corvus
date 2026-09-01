@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import messageRouter from "../src/routes/messages.js";
-import register from "../src/routes/register.js";
 import login from "../src/routes/login.js";
 import { loginSchema, registerSchema } from "./schemas/auth.schema.js";
 import "../src/services/discord.js";
@@ -37,7 +36,6 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.use("/api/messages", messageRouter);
-app.use("/api/register", validate(registerSchema), register);
 app.use("/api/login", validate(loginSchema), login);
 
 // Vercel invokes the exported app as a serverless function.
