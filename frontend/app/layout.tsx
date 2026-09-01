@@ -3,7 +3,7 @@ import { Inter, Space_Grotesk, JetBrains_Mono, VT323 } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
-import icon from "./icon.ico";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -14,15 +14,19 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
 });
 
+// Not used above the fold on the landing page — skip the <head> preload so they
+// don't compete with critical requests. They still load when first referenced.
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
+  preload: false,
 });
 
 const vt323 = VT323({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-vt323",
+  preload: false,
 });
 
 export const metadata: Metadata = {
